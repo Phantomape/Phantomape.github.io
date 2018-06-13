@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Maths," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="（二）Kalman Filter公式推导考虑一个用状态空间模型描述的动态系统$$X(t+1)=\Phi X(t) + \Gamma W(t) $$ $$Y(t)=H X(t) + V(t)$$其中，$t$ 为时间，系统在时刻 $t$ 的状态为 $X(t) \in R^n$ ；Y(t)为观测信号； $W(t) \in R^r$ 为输入的噪声， $V(t)\in R^m$ 为观测噪声。由于不同问题的状">
+<meta name="keywords" content="Maths">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kalman Filter II(Chinese)">
+<meta property="og:url" content="http://yoursite.com/2018/06/12/Kalman Filter II/index.html">
+<meta property="og:site_name" content="Phantomape&#39;s Blog">
+<meta property="og:description" content="（二）Kalman Filter公式推导考虑一个用状态空间模型描述的动态系统$$X(t+1)=\Phi X(t) + \Gamma W(t) $$ $$Y(t)=H X(t) + V(t)$$其中，$t$ 为时间，系统在时刻 $t$ 的状态为 $X(t) \in R^n$ ；Y(t)为观测信号； $W(t) \in R^r$ 为输入的噪声， $V(t)\in R^m$ 为观测噪声。由于不同问题的状">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-08-28T23:20:08.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kalman Filter II(Chinese)">
+<meta name="twitter:description" content="（二）Kalman Filter公式推导考虑一个用状态空间模型描述的动态系统$$X(t+1)=\Phi X(t) + \Gamma W(t) $$ $$Y(t)=H X(t) + V(t)$$其中，$t$ 为时间，系统在时刻 $t$ 的状态为 $X(t) \in R^n$ ；Y(t)为观测信号； $W(t) \in R^r$ 为输入的噪声， $V(t)\in R^m$ 为观测噪声。由于不同问题的状">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/12/Kalman Filter II/"/>
+
+
+
+
+
+  <title>Kalman Filter II(Chinese) | Phantomape's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Phantomape's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hello world</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/Kalman Filter II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kalman Filter II(Chinese)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-12T21:37:18-07:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Maths/" itemprop="url" rel="index">
+                    <span itemprop="name">Maths</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="（二）Kalman-Filter公式推导"><a href="#（二）Kalman-Filter公式推导" class="headerlink" title="（二）Kalman Filter公式推导"></a>（二）Kalman Filter公式推导</h1><p>考虑一个用状态空间模型描述的动态系统<br>$$X(t+1)=\Phi X(t) + \Gamma W(t) $$ $$Y(t)=H X(t) + V(t)$$其中，$t$ 为时间，系统在时刻 $t$ 的状态为 $X(t) \in R^n$ ；Y(t)为观测信号； $W(t) \in R^r$ 为输入的噪声， $V(t)\in R^m$ 为观测噪声。由于不同问题的状态空间描述是不一样的，因此只有在确定状态空间后才可以得到递推公式（这是我自己的看法，不知道对不对，可能递推公式还是一样，不过根据问题来推一遍公式总不会有错的，只是麻烦点）。</p>
+<h3 id="【假设1】"><a href="#【假设1】" class="headerlink" title="【假设1】"></a>【假设1】</h3><ul>
+<li>$W(t)$ 和 $V(t)$ 是均值为零，方差各为 $Q$ 和 $R$ 的不相关白噪声<h3 id="【假设2】"><a href="#【假设2】" class="headerlink" title="【假设2】"></a>【假设2】</h3></li>
+<li>初始状态 $X(0)$ 与 $W(t)$ 和 $V(t)$ 不相关，而且<br>$$E[X(0)] = \mu_0,E[(X(0)-\mu_0)(X(0)-\mu_0)^T] = P_0$$</li>
+</ul>
+<h2 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h2><ul>
+<li><strong>问题重述</strong></li>
+</ul>
+<p>卡尔曼滤波是一个基于观测信号 ${Y(1),Y(2),…,Y(t) }$ ，求状态 $X(k)$ 的线性最小方差估计值的问题 $\hat X(k|t)$ ，而且这个问题的目标函数是<br>$$J=E[(X(k)-\hat X(k|t))^T(X(k)-\hat X(k|t))]$$那么由之前的定义1.1可以得到，卡尔曼滤波问题可以归为求射影<br>$$\hat X(k|t) = proj(X(k)|Y(1),Y(2),…,Y(t))$$由定义1.5可以得到递推公式为<br>$$\hat X(t+1|t+1) = \hat X(t+1|t)+K(t+1)\epsilon (t+1)$$$$<br>K(t+1)=E[X(t+1)\epsilon^T(t+1)]{ E[\epsilon (t+1)\epsilon^T(t+1)]}^{-1}$$其中$K(t+1)$ 为卡尔曼滤波器增益。</p>
+<ul>
+<li><strong>对状态方程求射影</strong></li>
+</ul>
+<p>以 $w$ 表示观测信号，对状态方程 $X(t+1)=\Phi X(t) + \Gamma W(t) $ 两边取射影有（射影运算具有分配律，跟向量点乘一样）<br>$$proj(X(t+1)|w) = \Phi proj( X(t)|w)+\Gamma proj(W(t)|w)$$$$\hat X(t+1|t) = \Phi \hat X(t|t)+\Gamma proj(W(t)|w)$$迭代求解状态方程后获得原状态方程的另一种表示<br>$$X(t+1) = \Phi^{t+1}X(0) + \Gamma [\Phi^0 W(t)+\Phi^1 W(t-1)+…+\Phi^t W(0)]$$对于没有控制量的状态方程，由于假设1的白噪声的性质和假设2，我们可以知道 $X(0),W(0),…,W(t)$ 互不相关，即正交，因此可以把它们看作基，而 $X(t+1)$ 是可以由它们表示，所以有<br>$$X(t+1) \in L(W(t),…,W(0),X(0))$$当然，如果状态方程里面有控制量$U(t)$的加入，即<br>$$X(t+1)=\Phi X(t) + \Psi U(t) + \Gamma W(t) $$相应递推公式为<br>$$X(t+1) = \Phi^{t+1}X(0) +[\Phi^0 \Psi U(t)+\Phi^1 \Psi U(t-1) +…+\Phi^t\Psi U(0)]+ [\Phi^0 \Gamma W(t)+\Phi^1\Gamma W(t-1)+…+\Phi^t\Gamma W(0)] $$而有控制量的状态方程，我们认为每个时刻的控制量都是与公式中其它变量不相关，所以同理有<br>$$X(t+1) \in L(U(t),…,U(0),W(t),…,W(0),X(0))$$</p>
+<ul>
+<li><strong>对观测方程求射影</strong></li>
+</ul>
+<p>考虑上文中不带控制量的状态方程的推导，同理，对观测方程做同样的运算有<br>$$Y(t+1) \in L(V(t+1),W(t)…,W(0),X(0))$$所以有<br>$$L(Y(1),Y(2),…,Y(t)) \subset L(V(t),…,V(1),W(t-1),…,W(0),X(0))$$</p>
+<ul>
+<li><strong>状态方程和观测方程的递推式</strong></li>
+</ul>
+<p>由于假设，可以知道 $W(t)$ 与 $ {V(t),…,V(1),W(t-1),…,W(0),X(0)}$不相关（正交），所以有<br>$$W(t) \bot L(Y(1),Y(2),…,Y(t))$$因为正交，所以投影后的状态方程尾项为零，即<br>$$\hat X(t+1|t) = \Phi \hat X(t|t)$$对观测方程做同样的推导可以同理得到<br>$$V(t+1) \bot L(Y(1),Y(2),…,Y(t))$$$$\hat Y(t+1|t) =H \hat X(t+1|t) $$</p>
+<ul>
+<li><strong>协方差更新公式推导</strong></li>
+</ul>
+<p>将滤波器的预报估计值误差和协方差记为<br>$$\widetilde X(t|t) = X(t)-\hat X(t|t)$$ $$\widetilde X(t+1|t)=X(t+1)-\hat X(t+1|t)$$ $$P(t|t) = E[\widetilde X(t|t) \widetilde X^T(t|t)]$$ $$P(t+1|t) = E[\widetilde X(t+1|t)] \widetilde X^T(t+1|t)]$$由之前的定义1.3，引入新息（不需要管这个名词怎么来的）的表达式<br>$$\epsilon(t+1) = Y(t+1)-proj(Y(t+1)|Y(1),Y(2),…,Y(t))=Y(t+1)-\hat Y(t+1|t)=[H X(t+1)+V(t+1)]-[H\hat X(t+1|t)] = H \widetilde X(t+1|t)+V(t+1)$$下面进行估计值的误差和协方差的推导<br>$$\widetilde X(t+1|t) = X(t+1)-\hat X(t+1|t)$$$$<br>= [\Phi X(t)+\Gamma W(t)]-[\Phi \hat X(t|t)]$$$$<br>= \Phi \widetilde X(t|t) +\Gamma W(t)$$ 另外一个公式 $$<br>\widetilde X(t+1|t+1) = X(t+1)-\hat X(t+1|t+1)<br>$$$$= X(t+1) - [\hat X(t+1|t)+K(t+1)\epsilon (t+1)] $$$$<br>= \widetilde X(t+1|t) - K(t+1)\epsilon(t+1) $$$$<br>= \widetilde X(t+1|t) - K(t+1)[H\widetilde X(t+1|t)+V(t+1)]$$$$<br>= [I-K(t+1)H]\widetilde X(t+1|t) - K(t+1)V(t+1)$$在计算协方差更新公式时就要利用之前进行射影运算后得到的正交关系。由于$X(t) \in L(W(t-1),…,W(0),X(0))$，而且 $\hat X(t|t)$ 是 $X(t)$ 在流型上的投影（简单把流型理解成空间即可），因此由 $\hat X(t|t)$ 和 $X(t)$ 运算得到的 $\widetilde X(t|t)$ 也属于这个流型，而 $W(t)$ 与这个流型正交，所以有 $W(t) \bot \widetilde X(t|t)$ ，那么在计算协方差更新公式时有</p>
+<p>$$P(t+1|t) = E[\widetilde X(t+1|t)] \widetilde X^T(t+1|t)]$$ $$<br>= E{ [\Phi \widetilde X(t|t) +\Gamma W(t)][\Phi \widetilde X(t|t) +\Gamma W(t)]^T}$$$$<br>= E[\Phi \widetilde X(t|t) \widetilde X^T(t|t) \Phi] +E[\Phi \widetilde X(t|t) W^T(t) \Gamma^T ]+E[\Gamma W(t) \widetilde X^T(t|t)\Phi ]+E[\Gamma W(t)W^T(t)\Gamma^T]$$$$<br>= \Phi E[\widetilde X(t|t) \widetilde X^T(t|t)]\Phi^T+0+0+\Gamma E[W(t)W^T(t)]\Gamma^T$$ $$<br>= \Phi P(t|t)\Phi^T+\Gamma Q \Gamma^T$$ （真长(-｡-;)）同理对另一个协方差更新公式进行计算会得到<br>$$P(t+1|t+1) =[I-K(t+1)H]P(t+1|t)[I-K(t+1)H]^T+K(t+1)R K^T(t+1)$$当然这个公式还不是最简的形式，还可以进一步化简，之前文中已经提到了K(t+1)的表达式，则<br>$$K(t+1)=E[X(t+1)\epsilon^T(t+1)]{ E[\epsilon (t+1)\epsilon^T(t+1)]}^{-1}$$ $$<br>= E{[\hat X(t+1|t)+\widetilde X(t+1|t)][H\widetilde X(t+1|t)+V(t+1)]^T} { E[\epsilon (t+1)\epsilon^T(t+1)]}^{-1}$$ $$<br>= {E[\hat X(t+1|t) \widetilde X^T(t+1|t)H^T]+E[\widetilde X(t+1|t)\widetilde X^T(t+1|t)H^T]+E[\hat X(t+1|t)V^T(t+1)]+E[ \widetilde X(t+1|t) V^T(t+1)]} { E[\epsilon (t+1)\epsilon^T(t+1)]}^{-1}$$ $$<br>=( 0+P(t+1|t)H^T+0+0){ E[\epsilon (t+1)\epsilon^T(t+1)]}^{-1}$$ $$<br>=P(t+1|t)H^T E{  [H \widetilde X(t+1|t)+V(t+1)][ H \widetilde X(t+1|t)+V(t+1)]^T}^{-1}$$ $$<br>=P(t+1|t)H^T { HP(t+1|t)H^T+R}^{-1}$$将这个表达式代入上面的协方差更新公式 (基于简化公式的考虑，下面的推导省略时标)<br>$$P(t+1|t+1) = [I-KH]P[I-KH]^T+KRK^T$$ $$<br>=[I-KH]P-PH^TK^T+K(HPH^T+R)K^T$$ $$<br>=[I-KH]P-PH^TK^T+PH^TK^T$$ $$<br>=[I-KH]P$$即<br>$$P(t+1|t+1) = [I-K(t+1)H]P(t+1|t)$$至此所有推导已经完成了</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Maths/" rel="tag"># Maths</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/12/Kalman Filter I/" rel="next" title="Kalman Filter I(Chinese)">
+                <i class="fa fa-chevron-left"></i> Kalman Filter I(Chinese)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/12/LeetCode-1/" rel="prev" title="Two Sum">
+                Two Sum <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Phantomape" />
+          <p class="site-author-name" itemprop="name">Phantomape</p>
+           
+              <p class="site-description motion-element" itemprop="description">My personal blog to recode things related to programming</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/ || archive">
+            
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/phantomape" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:cxucheng@outlook.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#（二）Kalman-Filter公式推导"><span class="nav-number">1.</span> <span class="nav-text">（二）Kalman Filter公式推导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【假设1】"><span class="nav-number">1.0.1.</span> <span class="nav-text">【假设1】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【假设2】"><span class="nav-number">1.0.2.</span> <span class="nav-text">【假设2】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推导"><span class="nav-number">1.1.</span> <span class="nav-text">推导</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Phantomape</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

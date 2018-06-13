@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="My personal blog to recode things related to programming">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Phantomape&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Phantomape&#39;s Blog">
+<meta property="og:description" content="My personal blog to recode things related to programming">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Phantomape&#39;s Blog">
+<meta name="twitter:description" content="My personal blog to recode things related to programming">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/"/>
+
+
+
+
+
+  <title>Phantomape's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Phantomape's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hello world</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/LeetCode-634-DerangementOfAnArray/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/12/LeetCode-634-DerangementOfAnArray/" itemprop="url">Derangement of An Array</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-13T12:37:18+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Suppose that there are n people who are numbered 1, 2, …, n. Let there be n hats also numbered 1, 2, …, n. We have to find the number of ways in which no one gets the hat having same number as their number. Let us assume that the first person takes hat i. There are n − 1 ways for the first person to make such a choice. There are now two possibilities, depending on whether or not person i takes hat 1 in return:</p>
+<ol>
+<li>Person i does not take the hat 1. This case is equivalent to solving the problem with n − 1 persons and n − 1 hats: each of the remaining n − 1 people has precisely 1 forbidden choice from among the remaining n − 1 hats (i’s forbidden choice is hat 1).</li>
+<li>Person i takes the hat 1. Now the problem reduces to n − 2 persons and n − 2 hats.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">	int findDerangement(int n) &#123;</span><br><span class="line">		int64_t mod = pow(10, 9) + 7;</span><br><span class="line">		vector&lt;int64_t&gt; buf(n + 1, 0);</span><br><span class="line">		buf[1] = 0, buf[2] = 1;</span><br><span class="line">		for (int i = 3; i &lt;= n; i++)</span><br><span class="line">			buf[i] = ((int64_t)(i - 1) * (buf[i - 1] + buf[i - 2])) % mod;</span><br><span class="line">		return (int)buf[n];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/LeetCode-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/12/LeetCode-1/" itemprop="url">Two Sum</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-13T12:37:18+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>What’s interesting is that if I try to put the number into the unordered_map before I check for numbers that satisfy my target, some test cases won’t pass.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        unordered_map&lt;int, int&gt; buf;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        for (int i = 0; i &lt; nums.size(); i ++) &#123;</span><br><span class="line">            if (buf.count(target - nums[i]) &gt; 0 &amp;&amp; i != buf[target - nums[i]]) &#123;</span><br><span class="line">                res.push_back(i);</span><br><span class="line">                res.push_back(buf[target - nums[i]]);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            buf[nums[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(res.begin(), res.end());</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/Kalman Filter II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/12/Kalman Filter II/" itemprop="url">Kalman Filter II(Chinese)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-13T12:37:18+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Maths/" itemprop="url" rel="index">
+                    <span itemprop="name">Maths</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="（二）Kalman-Filter公式推导"><a href="#（二）Kalman-Filter公式推导" class="headerlink" title="（二）Kalman Filter公式推导"></a>（二）Kalman Filter公式推导</h1><p>考虑一个用状态空间模型描述的动态系统<br>$$X(t+1)=\Phi X(t) + \Gamma W(t) $$ $$Y(t)=H X(t) + V(t)$$其中，$t$ 为时间，系统在时刻 $t$ 的状态为 $X(t) \in R^n$ ；Y(t)为观测信号； $W(t) \in R^r$ 为输入的噪声， $V(t)\in R^m$ 为观测噪声。由于不同问题的状态空间描述是不一样的，因此只有在确定状态空间后才可以得到递推公式（这是我自己的看法，不知道对不对，可能递推公式还是一样，不过根据问题来推一遍公式总不会有错的，只是麻烦点）。</p>
+<h3 id="【假设1】"><a href="#【假设1】" class="headerlink" title="【假设1】"></a>【假设1】</h3><ul>
+<li>$W(t)$ 和 $V(t)$ 是均值为零，方差各为 $Q$ 和 $R$ 的不相关白噪声<h3 id="【假设2】"><a href="#【假设2】" class="headerlink" title="【假设2】"></a>【假设2】</h3></li>
+<li>初始状态 $X(0)$ 与 $W(t)$ 和 $V(t)$ 不相关，而且<br>$$E[X(0)] = \mu_0,E[(X(0)-\mu_0)(X(0)-\mu_0)^T] = P_0$$</li>
+</ul>
+<h2 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h2><ul>
+<li><strong>问题重述</strong></li>
+</ul>
+<p>卡尔曼滤波是一个基于观测信号 ${Y(1),Y(2),…,Y(t) }$ ，求状态 $X(k)$ 的线性最小方差估计值的问题 $\hat X(k|t)$ ，而且这个问题的目标函数是<br>$$J=E[(X(k)-\hat X(k|t))^T(X(k)-\hat X(k|t))]$$那么由之前的定义1.1可以得到，卡尔曼滤波问题可以归为求射影<br>$$\hat X(k|t) = proj(X(k)|Y(1),Y(2),…,Y(t))$$由定义1.5可以得到递推公式为<br>$$\hat X(t+1|t+1) = \hat X(t+1|t)+K(t+1)\epsilon (t+1)$$$$<br>K(t+1)=E[X(t+1)\epsilon^T(t+1)]{ E[\epsilon (t+1)\epsilon^T(t+1)]}^{-1}$$其中$K(t+1)$ 为卡尔曼滤波器增益。</p>
+<ul>
+<li><strong>对状态方程求射影</strong></li>
+</ul>
+<p>以 $w$ 表示观测信号，对状态方程 $X(t+1)=\Phi X(t) + \Gamma W(t) $ 两边取射影有（射影运算具有分配律，跟向量点乘一样）<br>$$proj(X(t+1)|w) = \Phi proj( X(t)|w)+\Gamma proj(W(t)|w)$$$$\hat X(t+1|t) = \Phi \hat X(t|t)+\Gamma proj(W(t)|w)$$迭代求解状态方程后获得原状态方程的另一种表示<br>$$X(t+1) = \Phi^{t+1}X(0) + \Gamma [\Phi^0 W(t)+\Phi^1 W(t-1)+…+\Phi^t W(0)]$$对于没有控制量的状态方程，由于假设1的白噪声的性质和假设2，我们可以知道 $X(0),W(0),…,W(t)$ 互不相关，即正交，因此可以把它们看作基，而 $X(t+1)$ 是可以由它们表示，所以有<br>$$X(t+1) \in L(W(t),…,W(0),X(0))$$当然，如果状态方程里面有控制量$U(t)$的加入，即<br>$$X(t+1)=\Phi X(t) + \Psi U(t) + \Gamma W(t) $$相应递推公式为<br>$$X(t+1) = \Phi^{t+1}X(0) +[\Phi^0 \Psi U(t)+\Phi^1 \Psi U(t-1) +…+\Phi^t\Psi U(0)]+ [\Phi^0 \Gamma W(t)+\Phi^1\Gamma W(t-1)+…+\Phi^t\Gamma W(0)] $$而有控制量的状态方程，我们认为每个时刻的控制量都是与公式中其它变量不相关，所以同理有<br>$$X(t+1) \in L(U(t),…,U(0),W(t),…,W(0),X(0))$$</p>
+<ul>
+<li><strong>对观测方程求射影</strong></li>
+</ul>
+<p>考虑上文中不带控制量的状态方程的推导，同理，对观测方程做同样的运算有<br>$$Y(t+1) \in L(V(t+1),W(t)…,W(0),X(0))$$所以有<br>$$L(Y(1),Y(2),…,Y(t)) \subset L(V(t),…,V(1),W(t-1),…,W(0),X(0))$$</p>
+<ul>
+<li><strong>状态方程和观测方程的递推式</strong></li>
+</ul>
+<p>由于假设，可以知道 $W(t)$ 与 $ {V(t),…,V(1),W(t-1),…,W(0),X(0)}$不相关（正交），所以有<br>$$W(t) \bot L(Y(1),Y(2),…,Y(t))$$因为正交，所以投影后的状态方程尾项为零，即<br>$$\hat X(t+1|t) = \Phi \hat X(t|t)$$对观测方程做同样的推导可以同理得到<br>$$V(t+1) \bot L(Y(1),Y(2),…,Y(t))$$$$\hat Y(t+1|t) =H \hat X(t+1|t) $$</p>
+<ul>
+<li><strong>协方差更新公式推导</strong></li>
+</ul>
+<p>将滤波器的预报估计值误差和协方差记为<br>$$\widetilde X(t|t) = X(t)-\hat X(t|t)$$ $$\widetilde X(t+1|t)=X(t+1)-\hat X(t+1|t)$$ $$P(t|t) = E[\widetilde X(t|t) \widetilde X^T(t|t)]$$ $$P(t+1|t) = E[\widetilde X(t+1|t)] \widetilde X^T(t+1|t)]$$由之前的定义1.3，引入新息（不需要管这个名词怎么来的）的表达式<br>$$\epsilon(t+1) = Y(t+1)-proj(Y(t+1)|Y(1),Y(2),…,Y(t))=Y(t+1)-\hat Y(t+1|t)=[H X(t+1)+V(t+1)]-[H\hat X(t+1|t)] = H \widetilde X(t+1|t)+V(t+1)$$下面进行估计值的误差和协方差的推导<br>$$\widetilde X(t+1|t) = X(t+1)-\hat X(t+1|t)$$$$<br>= [\Phi X(t)+\Gamma W(t)]-[\Phi \hat X(t|t)]$$$$<br>= \Phi \widetilde X(t|t) +\Gamma W(t)$$ 另外一个公式 $$<br>\widetilde X(t+1|t+1) = X(t+1)-\hat X(t+1|t+1)<br>$$$$= X(t+1) - [\hat X(t+1|t)+K(t+1)\epsilon (t+1)] $$$$<br>= \widetilde X(t+1|t) - K(t+1)\epsilon(t+1) $$$$<br>= \widetilde X(t+1|t) - K(t+1)[H\widetilde X(t+1|t)+V(t+1)]$$$$<br>= [I-K(t+1)H]\widetilde X(t+1|t) - K(t+1)V(t+1)$$在计算协方差更新公式时就要利用之前进行射影运算后得到的正交关系。由于$X(t) \in L(W(t-1),…,W(0),X(0))$，而且 $\hat X(t|t)$ 是 $X(t)$ 在流型上的投影（简单把流型理解成空间即可），因此由 $\hat X(t|t)$ 和 $X(t)$ 运算得到的 $\widetilde X(t|t)$ 也属于这个流型，而 $W(t)$ 与这个流型正交，所以有 $W(t) \bot \widetilde X(t|t)$ ，那么在计算协方差更新公式时有</p>
+<p>$$P(t+1|t) = E[\widetilde X(t+1|t)] \widetilde X^T(t+1|t)]$$ $$<br>= E{ [\Phi \widetilde X(t|t) +\Gamma W(t)][\Phi \widetilde X(t|t) +\Gamma W(t)]^T}$$$$<br>= E[\Phi \widetilde X(t|t) \widetilde X^T(t|t) \Phi] +E[\Phi \widetilde X(t|t) W^T(t) \Gamma^T ]+E[\Gamma W(t) \widetilde X^T(t|t)\Phi ]+E[\Gamma W(t)W^T(t)\Gamma^T]$$$$<br>= \Phi E[\widetilde X(t|t) \widetilde X^T(t|t)]\Phi^T+0+0+\Gamma E[W(t)W^T(t)]\Gamma^T$$ $$<br>= \Phi P(t|t)\Phi^T+\Gamma Q \Gamma^T$$ （真长(-｡-;)）同理对另一个协方差更新公式进行计算会得到<br>$$P(t+1|t+1) =[I-K(t+1)H]P(t+1|t)[I-K(t+1)H]^T+K(t+1)R K^T(t+1)$$当然这个公式还不是最简的形式，还可以进一步化简，之前文中已经提到了K(t+1)的表达式，则<br>$$K(t+1)=E[X(t+1)\epsilon^T(t+1)]{ E[\epsilon (t+1)\epsilon^T(t+1)]}^{-1}$$ $$<br>= E{[\hat X(t+1|t)+\widetilde X(t+1|t)][H\widetilde X(t+1|t)+V(t+1)]^T} { E[\epsilon (t+1)\epsilon^T(t+1)]}^{-1}$$ $$<br>= {E[\hat X(t+1|t) \widetilde X^T(t+1|t)H^T]+E[\widetilde X(t+1|t)\widetilde X^T(t+1|t)H^T]+E[\hat X(t+1|t)V^T(t+1)]+E[ \widetilde X(t+1|t) V^T(t+1)]} { E[\epsilon (t+1)\epsilon^T(t+1)]}^{-1}$$ $$<br>=( 0+P(t+1|t)H^T+0+0){ E[\epsilon (t+1)\epsilon^T(t+1)]}^{-1}$$ $$<br>=P(t+1|t)H^T E{  [H \widetilde X(t+1|t)+V(t+1)][ H \widetilde X(t+1|t)+V(t+1)]^T}^{-1}$$ $$<br>=P(t+1|t)H^T { HP(t+1|t)H^T+R}^{-1}$$将这个表达式代入上面的协方差更新公式 (基于简化公式的考虑，下面的推导省略时标)<br>$$P(t+1|t+1) = [I-KH]P[I-KH]^T+KRK^T$$ $$<br>=[I-KH]P-PH^TK^T+K(HPH^T+R)K^T$$ $$<br>=[I-KH]P-PH^TK^T+PH^TK^T$$ $$<br>=[I-KH]P$$即<br>$$P(t+1|t+1) = [I-K(t+1)H]P(t+1|t)$$至此所有推导已经完成了</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/Kalman Filter I/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/12/Kalman Filter I/" itemprop="url">Kalman Filter I(Chinese)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-13T12:37:18+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Maths/" itemprop="url" rel="index">
+                    <span itemprop="name">Maths</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近利用卡尔曼滤波来做tracking的东西，然后随手推导了一下。网上大都是只有例子源代码和约定俗成的公式，不太方便使用，毕竟不能保证你遇到的问题恰好能用现有模型来套。所以对滤波器的来由需要深刻地理解一下。</p>
+<h1 id="（一）Kalman-Filter原理"><a href="#（一）Kalman-Filter原理" class="headerlink" title="（一）Kalman Filter原理"></a>（一）Kalman Filter原理</h1><h2 id="定义1-1"><a href="#定义1-1" class="headerlink" title="定义1.1"></a>定义1.1</h2><p>由 $m\times 1$ 维随机向量 $y\in R^m$ 的线性函数估计 $n\times 1$ 维随机变量 $x\in R^n$ ，估计值记为$$    \hat x = b + Ay ,b\in R^n,A\in R^{n\times m}$$若估计值极小化的指标函数为$$    J = E[(x- \hat x)^T(x- \hat x)]$$则称 $\hat x$ 为随机变量的线性最小方差估计。由观测值 $y$ 求随机变量 $x$ 的线性最小方差估计的表达式为<br>$$\hat x = E(x)+Cov(x,y)Var(y)^{-1}(y-E(y))$$虽然这个公式好像好难懂，不过暂时不需要完全理解它，后面在推导时可以慢慢领会。同时这个 $\hat x$ 有三个性质</p>
+<p>（1）无偏性，$E(\hat x) = E(x)$</p>
+<p>（2）正交性，$E[(x-\hat x)y^T] = 0$</p>
+<p>（3）不相关性，$x-\hat x$ 与 $y$ 不相关</p>
+<h2 id="定义1-2"><a href="#定义1-2" class="headerlink" title="定义1.2"></a>定义1.2</h2><p> $x-\hat x$ 与 $y$ 不相关，那么等价于 $x-\hat x$ 与 $y$ 正交（或者理解为垂直），记为 $x-\hat x\bot y$ ，并且称$ \hat x $为 $x$ 在 $y$ 上 的射影，记为$\hat x = proj（x | y） $</p>
+<h2 id="定义1-3"><a href="#定义1-3" class="headerlink" title="定义1.3"></a>定义1.3</h2><p>基于随机变量 $y(1),y(2),…,y(k)\in R^m$，对随机变量 $x\in R^m$ 的线性最小方差估计 $ \hat x$ 定义为$$\hat x = proj(x|w)=proj(x|y(1),y(2),…,y(k))$$也称 $\hat x$ 为 $x$ 在线性流型 $L(w)$ 或 $L(y(1),y(2),…,y(k))$ 上的射影。流型的概念不需要理解，因为后面推导不涉及对它的完全理解</p>
+<h2 id="定义1-4"><a href="#定义1-4" class="headerlink" title="定义1.4"></a>定义1.4</h2><p>设 $y(1),y(2),…,y(k)\in R^m$ 是存在二阶矩的随机序列，它的新息序列（不用纠结名字，其实后面推导里它就是误差序列）定义为<br>$$\epsilon(k)=y(k)-proj(y(k)|y(1),y(2),…,y(k-1)),k =1,2,…$$并定义的一步最优预报估计值为<br>$$\hat y(k|k-1)=proj(y(k)|y(1),y(2),…,y(k-1))$$因此新息序列可重新写成<br>$$\epsilon(k)=y(k)-\hat y(k|k-1),k =1,2,…$$需要规定 $\hat y(1|0)=E[y(1)]$ ，这保证了$E[\epsilon(1)]=0$，所以有$\epsilon(k) \bot L(y(1),y(2),…,y(k-1))$</p>
+<h2 id="定义1-5"><a href="#定义1-5" class="headerlink" title="定义1.5"></a>定义1.5</h2><p>设随机变量 $x\in R^n$ ，随机序列 $y(k)\in R^m$ ，而且随机序列存在二阶矩，则有递推公式（证明以后再补好了(-｡-;)）<br>$$proj(x|y(1),y(2),…,y(k))=proj(x|y(1),y(2),…,y(k-1))+E[x\epsilon^T(k)]{E[\epsilon(k)\epsilon^T(k)]}^{-1}\epsilon(k)$$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/12/hello-world/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-13T12:34:37+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/GIL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/26/GIL/" itemprop="url">Global Interpreter Lock(GIL)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T21:15:05+08:00">
+                2018-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Python is a very handy tool in terms of web development, machine learning and many other areas; however, it is also well-known for its poor performance in parallell computing due to global interpreter lock(GIL), which only exists in Cython. As I see it, its use of GIL doesn’t bother me a lot, but it is still very intriguing and worth some time to investigate why lies beneath the GIL. I came across this <a href="http://www.dabeaz.com/python/GIL.pdf" target="_blank" rel="noopener">slide</a> on the train to Cupertino. </p>
+<h2 id="Performance-Experience"><a href="#Performance-Experience" class="headerlink" title="Performance Experience"></a>Performance Experience</h2><p>Let’s consider a simple function<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def count(n):    </span><br><span class="line">	while n &gt; 0:        </span><br><span class="line">		n -= 1</span><br></pre></td></tr></table></figure></p>
+<p>compare the result of running it with and without threads. It turns out that the one with threads are far more slower than the other one. The result is based on a multi-core CPU and it you disable one of the CPU cores, the performance for the threaded program becomes slightly better.</p>
+<h2 id="Thread-Creation"><a href="#Thread-Creation" class="headerlink" title="Thread Creation"></a>Thread Creation</h2><p>When you create a thread, python would create a small data structure containing some interpreter state and fires off a thread and call the function PyEval_CallObject.</p>
+<h2 id="Thread-Execution"><a href="#Thread-Execution" class="headerlink" title="Thread Execution"></a>Thread Execution</h2><p>The interpreter has a global variable that points to the thread state structure of the current thread. So in conclusion, only one thread can execute in the interpreter at a time.</p>
+<h2 id="GIL-Behavior"><a href="#GIL-Behavior" class="headerlink" title="GIL Behavior"></a>GIL Behavior</h2><p>Threads hold the GIL when running; however, they would relaese it when blocked for I/O. When it deals with CPU-bound threads like our function, the interpreter periodically performs a “check” every 100 interpreter “ticks” by default. So what happens during the periodic check? There are many two things:</p>
+<ol>
+<li>In the main thread only, signal handlers will execute if there are any pending signals (more shortly) </li>
+<li>Release and reacquire the GIL<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// ceval.c</span><br><span class="line">if (--_Py_Ticker &lt; 0) &#123;</span><br><span class="line">    if (*next_instr == SETUP_FINALLY) &#123;</span><br><span class="line">        /* Make the last opcode before a try: finally: block uninterruptible. */</span><br><span class="line">        goto fast_next_opcode;</span><br><span class="line">    &#125;</span><br><span class="line">    _Py_Ticker = _Py_CheckInterval;</span><br><span class="line">    tstate-&gt;tick_counter++;</span><br><span class="line">    ....... /*for pending*/</span><br><span class="line">&#125;</span><br><span class="line">if (interpreter_lock) &#123;</span><br><span class="line">    /* Give another thread a chance */</span><br><span class="line"></span><br><span class="line">    if (PyThreadState_Swap(NULL) != tstate)</span><br><span class="line">        Py_FatalError(&quot;ceval: tstate mix-up&quot;);</span><br><span class="line">    PyThread_release_lock(interpreter_lock);</span><br><span class="line"></span><br><span class="line">    /* Other threads may run now */</span><br><span class="line"></span><br><span class="line">    PyThread_acquire_lock(interpreter_lock, 1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>If a signal arrives, the interpreter runs the “check” after every tick until the main thread runs. Since signal handlers can only run in the main thread, the interpreter quickly acquires/releases the GIL after every tick until it gets scheduled, which is why it is that slow in threaded program. This is partly why signals get so weird (the interpreter has no control over scheduling so it just attempts to thread switch as fast as possible with the hope that main will run).</p>
+<h2 id="Priority-Inversion-in-Multicore-Processor"><a href="#Priority-Inversion-in-Multicore-Processor" class="headerlink" title="Priority Inversion in Multicore Processor"></a>Priority Inversion in Multicore Processor</h2><p>A CPU-bound thread (low priority) can be blocking the execution of an I/O-bound thread (high priority). It occurs because the I/O thread can’t wake up fast enough to acquire the GIL before the CPU-bound thread reacquires it.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/Lazy Loading/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/24/Lazy Loading/" itemprop="url">Lazy Loading</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-24T23:35:04+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">Frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>I came across lazy loading while building a new feature for our company’s new website. In our page, we have tons of images to load, which is very costly and exerts a very negative user experience. Thus, we try to use lazy loading to improve the speed of loading the page.<br>To build a twittmap, we need to utilize the twitter API. Here, I chose twitter4j, which is an unofficial Java library for the Twitter API. With Twitter4J, you can easily integrate your Java application with the Twitter service. There are some tutorials here: <a href="https://xmeng.wordpress.com/2011/07/10/how-to-handle-sign-in-with-twitter-using-twitter4j/" title="How to sign in with twitter using twitter4j" target="_blank" rel="noopener">How to “Sign in with Twitter” using twitter4j</a>.</p>
+<h2 id="Register-twitter-app"><a href="#Register-twitter-app" class="headerlink" title="Register twitter app"></a>Register twitter app</h2><p>Click this <a href="https://dev.twitter.com/apps" target="_blank" rel="noopener">link</a>and fill out the following form, it should be fine. Just remember to grant your app access for read and write.</p>
+<h2 id="Include-twitter4j"><a href="#Include-twitter4j" class="headerlink" title="Include twitter4j"></a>Include twitter4j</h2><p>For those who are not familiar with java, it would be a painful process to learn how use new tools at first(I like VS better, lol). Don’t worry, just follow the steps below. </p>
+<ol>
+<li>Download twitter4j from <a href="http://twitter4j.org/en/" target="_blank" rel="noopener">here</a>.</li>
+<li>Unzip it.</li>
+<li>After you create a java project, Right-click on your Java project and Select Properties.</li>
+<li>Choose Java Build Path and select the third tab, Libraries.</li>
+<li>Click add external library and add twitter4j-core-4.0.4.jar.<h2 id="Begin-programming"><a href="#Begin-programming" class="headerlink" title="Begin programming"></a>Begin programming</h2>A lot of examples are available. Here is the sample code used in tutorial mentioned above (Using eclipse).<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.Status;</span><br><span class="line">import twitter4j.Twitter;</span><br><span class="line">import twitter4j.TwitterException;</span><br><span class="line">import twitter4j.TwitterFactory;</span><br><span class="line">import twitter4j.auth.AccessToken;</span><br><span class="line">import twitter4j.auth.RequestToken;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line">import twitter4j.conf.Configuration;</span><br><span class="line"> </span><br><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line">public class FirstClass &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		String testStatus=&quot;Hello from twitter4j&quot;;</span><br><span class="line">		 </span><br><span class="line">        ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">        //the following is set without accesstoken- desktop client</span><br><span class="line">        cb.setDebugEnabled(true)</span><br><span class="line">        	.setOAuthConsumerKey(&quot;CONSUMER-KEY&quot;)</span><br><span class="line">        	.setOAuthConsumerSecret(&quot;CONSUMER-SECRET&quot;);</span><br><span class="line">		try&#123;</span><br><span class="line">			TwitterFactory tf = new TwitterFactory(cb.build());</span><br><span class="line">            Twitter twitter = tf.getInstance();</span><br><span class="line">			</span><br><span class="line">			try&#123;</span><br><span class="line">				RequestToken requestToken = twitter.getOAuthRequestToken();</span><br><span class="line">                System.out.println(&quot;Got request token.&quot;);</span><br><span class="line">                System.out.println(&quot;Request token: &quot; + requestToken.getToken());</span><br><span class="line">                System.out.println(&quot;Request token secret: &quot; + requestToken.getTokenSecret());</span><br><span class="line">                AccessToken accessToken = null;</span><br><span class="line">                </span><br><span class="line">                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">                while(accessToken == null)&#123;</span><br><span class="line">                	System.out.println(&quot;Open the following URL and grant access to your account:&quot;);</span><br><span class="line">                    System.out.println(requestToken.getAuthorizationURL());</span><br><span class="line">                    System.out.print(&quot;Enter the PIN(if available) and hit enter after you granted access.[PIN]:&quot;);</span><br><span class="line">                    String pin = br.readLine();</span><br><span class="line">                    try &#123;</span><br><span class="line">                        if (pin.length() &gt; 0) &#123;</span><br><span class="line">                            accessToken = twitter.getOAuthAccessToken(requestToken, pin);</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            accessToken = twitter.getOAuthAccessToken(requestToken);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; catch (TwitterException te) &#123;</span><br><span class="line">                        if (401 == te.getStatusCode()) &#123;</span><br><span class="line">                            System.out.println(&quot;Unable to get the access token.&quot;);</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            te.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;Got access token.&quot;);</span><br><span class="line">                System.out.println(&quot;Access token: &quot; + accessToken.getToken());</span><br><span class="line">                System.out.println(&quot;Access token secret: &quot; + accessToken.getTokenSecret());</span><br><span class="line">			&#125; catch(IllegalStateException ie)&#123;</span><br><span class="line">				if (!twitter.getAuthorization().isEnabled()) &#123;</span><br><span class="line">                    System.out.println(&quot;OAuth consumer key/secret is not set.&quot;);</span><br><span class="line">                    System.exit(-1);</span><br><span class="line">                &#125;</span><br><span class="line">			&#125;</span><br><span class="line">			Status status = twitter.updateStatus(testStatus);</span><br><span class="line">	        System.out.println(&quot;Successfully updated the status to [&quot; + status.getText() + &quot;].&quot;);</span><br><span class="line">	        System.exit(0);</span><br><span class="line">		&#125; catch (TwitterException te) &#123;</span><br><span class="line">            te.printStackTrace();</span><br><span class="line">            System.out.println(&quot;Failed to get timeline: &quot; + te.getMessage());</span><br><span class="line">            System.exit(-1);</span><br><span class="line">        &#125; catch (IOException ioe) &#123;</span><br><span class="line">            ioe.printStackTrace();</span><br><span class="line">            System.out.println(&quot;Failed to read the system input.&quot;);</span><br><span class="line">            System.exit(-1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>This piece of code can post a twitter from your account, after running this u can see the following instructions.<br><img src="http://img.blog.csdn.net/20161012030205951" alt="Instructions"><br>Just click into the url it mentioned and grant access to your app, and then type in the PIN code that it gives u. After that, u can check ur twitter now.<br><img src="http://img.blog.csdn.net/20161012030038935" alt="Result"></p>
+<h2 id="Use-streaming-API"><a href="#Use-streaming-API" class="headerlink" title="Use streaming API"></a>Use streaming API</h2><p>Here is the code.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.*;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line"></span><br><span class="line">public class PrintSampleStream &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws TwitterException&#123;</span><br><span class="line">		 ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">	        //the following is set without accesstoken- desktop client</span><br><span class="line">	        cb.setDebugEnabled(true)</span><br><span class="line">	        	.setOAuthConsumerKey(&quot;I won&apos;t tell u&quot;)</span><br><span class="line">	        	.setOAuthConsumerSecret(&quot;what my key and secret is&quot;)</span><br><span class="line">	        	.setOAuthAccessToken(&quot;LOL&quot;)</span><br><span class="line">	        	.setOAuthAccessTokenSecret(&quot;:)&quot;);</span><br><span class="line">		</span><br><span class="line">		TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();</span><br><span class="line">	    StatusListener listener = new StatusListener() &#123;</span><br><span class="line">	    	 public void onStatus(Status status) &#123;</span><br><span class="line">	             System.out.println(status.getUser().getName() + &quot; : &quot; + status.getText());</span><br><span class="line">	         &#125;</span><br><span class="line">	         public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) &#123;&#125;</span><br><span class="line">	         public void onTrackLimitationNotice(int numberOfLimitedStatuses) &#123;&#125;</span><br><span class="line">	         public void onException(Exception ex)&#123;</span><br><span class="line">	             ex.printStackTrace();</span><br><span class="line">	         &#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onScrubGeo(long arg0, long arg1) &#123;</span><br><span class="line">				// TODO Auto-generated method stub</span><br><span class="line">			&#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onStallWarning(StallWarning arg0) &#123;</span><br><span class="line">				// TODO Auto-generated method stub			</span><br><span class="line">			&#125;</span><br><span class="line">	     &#125;;</span><br><span class="line">	     twitterStream.addListener(listener);</span><br><span class="line">	     twitterStream.sample();</span><br><span class="line">	     </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>This piece of sample code enables you to fetch tweets from twitter in real-time.</p>
+<h2 id="Fetch-Filtered-Stream"><a href="#Fetch-Filtered-Stream" class="headerlink" title="Fetch Filtered Stream"></a>Fetch Filtered Stream</h2><p>Sometimes, we would like to search information that we are interested in, so we may need to filter the stream so that we can get relevant twitters. The code is shown below.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.*;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class PrintFilteredStream &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws TwitterException &#123;</span><br><span class="line">		String[] keywordsArray = &#123;&quot;iphone&quot;, &quot;samsung&quot;&#125;;</span><br><span class="line">		</span><br><span class="line">		ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">	        //the following is set without accesstoken- desktop client</span><br><span class="line">	    cb.setDebugEnabled(true)</span><br><span class="line">	    	.setOAuthConsumerKey(&quot;CONSUMER-KEY&quot;)</span><br><span class="line">	        .setOAuthConsumerSecret(&quot;CONSUMER-SECRET&quot;)</span><br><span class="line">	        .setOAuthAccessToken(&quot;ACCESS-TOKEN&quot;)</span><br><span class="line">	        .setOAuthAccessTokenSecret(&quot;ACCESS-TOKEN-SECRET&quot;);</span><br><span class="line">		</span><br><span class="line">		//	Implementing StatusListner</span><br><span class="line">		StatusListener listener = new StatusListener() &#123;</span><br><span class="line">			@Override</span><br><span class="line">	    	public void onStatus(Status status) &#123;</span><br><span class="line">	            System.out.println(status.getUser().getName() + &quot; : &quot; + status.getText());</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) &#123;</span><br><span class="line">				System.out.println(&quot;Got a status deletion notice id:&quot; + statusDeletionNotice.getStatusId());</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">	        public void onTrackLimitationNotice(int numberOfLimitedStatuses) &#123;</span><br><span class="line">				System.out.println(&quot;Got track limitation notice:&quot; + numberOfLimitedStatuses);</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">	        public void onException(Exception ex)&#123;</span><br><span class="line">				ex.printStackTrace();</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onScrubGeo(long userId, long upToStatusId) &#123;</span><br><span class="line">				System.out.println(&quot;Got scrub_geo event userId:&quot; + userId + &quot; upToStatusId:&quot; + upToStatusId);</span><br><span class="line">			&#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onStallWarning(StallWarning warning) &#123;</span><br><span class="line">				System.out.println(&quot;Got stall warning:&quot; + warning);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	     </span><br><span class="line">		TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();</span><br><span class="line">		twitterStream.addListener(listener);</span><br><span class="line">		ArrayList&lt;Long&gt; follow = new ArrayList&lt;Long&gt;();</span><br><span class="line">		ArrayList&lt;String&gt; track = new ArrayList&lt;String&gt;();</span><br><span class="line">		for(String arg : keywordsArray)&#123;</span><br><span class="line">			if(isNumericalArgument(arg))&#123;</span><br><span class="line">				for(String id : arg.split(&quot;,&quot;))&#123;</span><br><span class="line">					follow.add(Long.parseLong(id));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				track.addAll(Arrays.asList(arg.split(&quot;,&quot;)));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		long[] followArray = new long[follow.size()];</span><br><span class="line">		for(int i = 0; i &lt; follow.size(); i++)&#123;</span><br><span class="line">			followArray[i] = follow.get(i);</span><br><span class="line">		&#125;</span><br><span class="line">		String[] trackArray = track.toArray(new String[track.size()]);</span><br><span class="line">		twitterStream.filter(new FilterQuery(0, followArray, trackArray));	 </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static boolean isNumericalArgument(String argument)&#123;</span><br><span class="line">		String args[] = argument.split(&quot;,&quot;);</span><br><span class="line">		boolean isNumericalArgument = true;</span><br><span class="line">		for(String arg : args)&#123;</span><br><span class="line">			try&#123;</span><br><span class="line">				Integer.parseInt(arg);</span><br><span class="line">			&#125; catch(NumberFormatException nfe)&#123;</span><br><span class="line">				isNumericalArgument = false;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return isNumericalArgument;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Set-up-elasticsearch-environment"><a href="#Set-up-elasticsearch-environment" class="headerlink" title="Set up elasticsearch environment"></a>Set up elasticsearch environment</h2><ol>
+<li>Go to AWS console and select elasticsearch service(you can also choose to use elasticsearch by downloading and unzipping it from <a href="https://www.elastic.co/" target="_blank" rel="noopener">here</a>)</li>
+<li>Set access police to open access or any way you like, and then use curl to create index using <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html" target="_blank" rel="noopener">index</a> API.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XPUT &apos;http://search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/&apos; -d &apos;&#123;</span><br><span class="line">    &quot;settings&quot; : &#123;</span><br><span class="line">        &quot;index&quot; : &#123;</span><br><span class="line">            &quot;number_of_shards&quot; : 3, </span><br><span class="line">            &quot;number_of_replicas&quot; : 2 </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>this piece of code will create an index named “user” in your AWS domain. </p>
+<ol start="3">
+<li>Next, you are going to create mapping. Here, the mapping called “profile” is created, which has three properties: text, latitude and longitude.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/_mapping/profile -d </span><br><span class="line">&apos;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot; : &#123;</span><br><span class="line">	    &quot;properties&quot; : &#123;</span><br><span class="line">		&quot;text&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;,</span><br><span class="line">		&quot;latitude&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;,</span><br><span class="line">		&quot;longitude&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Upload-data-to-elasticsearch"><a href="#Upload-data-to-elasticsearch" class="headerlink" title="Upload data to elasticsearch"></a>Upload data to elasticsearch</h2><p>To upload data to elasticsearch, you can use the curl command in cygwin, since I am using a windows machine, or put this piece of code into the java program that are fetching twitter. From twitter stream, we can obtain a JSONObject, which could by utilize into uploading to elasticsearch.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">String url = &quot;http://search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/profile&quot;;</span><br><span class="line">HttpClient client = HttpClientBuilder.create().build();</span><br><span class="line">HttpPost put = new HttpPost(url);</span><br><span class="line">put.setHeader(&quot;Content-type&quot;, &quot;application/json&quot;);</span><br><span class="line">StringEntity params =new StringEntity(json.toString());</span><br><span class="line">put.setEntity(params);</span><br><span class="line">HttpResponse response = client.execute(put);</span><br><span class="line">System.out.println(&quot;Response Code:&quot;+response.getStatusLine().getStatusCode());</span><br><span class="line">	</span><br><span class="line">BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));</span><br><span class="line">StringBuffer result = new StringBuffer();</span><br><span class="line">String line = &quot;&quot;;</span><br><span class="line">while ((line = rd.readLine()) != null) &#123;</span><br><span class="line">	result.append(line);</span><br><span class="line">&#125;</span><br><span class="line">							System.out.println(&quot;result:&quot;+result);</span><br></pre></td></tr></table></figure></p>
+<h2 id="UI-for-our-application"><a href="#UI-for-our-application" class="headerlink" title="UI for our application"></a>UI for our application</h2><p><img src="http://img.blog.csdn.net/20161025083341588" alt="Main UI"><br>This is the entry point for our application, you can choose keyword for twitter.<br><img src="http://img.blog.csdn.net/20161025083510465" alt="Google Map"><br>After you choose the keyword and click the “show” button, you can see the corresponding twitter location marked on the map.<br>Every 5 seconds, the front end will refresh and the counter, which can be seen in the second picture as 10, will gradually increase as our backend program continuously fetching data from twitter.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/Using react component in twig/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/Using react component in twig/" itemprop="url">Using React Component in Twig File</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T22:30:04+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">Frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>To build a twittmap, we need to utilize the twitter API. Here, I chose twitter4j, which is an unofficial Java library for the Twitter API. With Twitter4J, you can easily integrate your Java application with the Twitter service. There are some tutorials here: <a href="https://xmeng.wordpress.com/2011/07/10/how-to-handle-sign-in-with-twitter-using-twitter4j/" title="How to sign in with twitter using twitter4j" target="_blank" rel="noopener">How to “Sign in with Twitter” using twitter4j</a>.</p>
+<h2 id="Register-twitter-app"><a href="#Register-twitter-app" class="headerlink" title="Register twitter app"></a>Register twitter app</h2><p>Click this <a href="https://dev.twitter.com/apps" target="_blank" rel="noopener">link</a>and fill out the following form, it should be fine. Just remember to grant your app access for read and write.</p>
+<h2 id="Include-twitter4j"><a href="#Include-twitter4j" class="headerlink" title="Include twitter4j"></a>Include twitter4j</h2><p>For those who are not familiar with java, it would be a painful process to learn how use new tools at first(I like VS better, lol). Don’t worry, just follow the steps below. </p>
+<ol>
+<li>Download twitter4j from <a href="http://twitter4j.org/en/" target="_blank" rel="noopener">here</a>.</li>
+<li>Unzip it.</li>
+<li>After you create a java project, Right-click on your Java project and Select Properties.</li>
+<li>Choose Java Build Path and select the third tab, Libraries.</li>
+<li>Click add external library and add twitter4j-core-4.0.4.jar.<h2 id="Begin-programming"><a href="#Begin-programming" class="headerlink" title="Begin programming"></a>Begin programming</h2>A lot of examples are available. Here is the sample code used in tutorial mentioned above (Using eclipse).<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.Status;</span><br><span class="line">import twitter4j.Twitter;</span><br><span class="line">import twitter4j.TwitterException;</span><br><span class="line">import twitter4j.TwitterFactory;</span><br><span class="line">import twitter4j.auth.AccessToken;</span><br><span class="line">import twitter4j.auth.RequestToken;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line">import twitter4j.conf.Configuration;</span><br><span class="line"> </span><br><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line">public class FirstClass &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		String testStatus=&quot;Hello from twitter4j&quot;;</span><br><span class="line">		 </span><br><span class="line">        ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">        //the following is set without accesstoken- desktop client</span><br><span class="line">        cb.setDebugEnabled(true)</span><br><span class="line">        	.setOAuthConsumerKey(&quot;CONSUMER-KEY&quot;)</span><br><span class="line">        	.setOAuthConsumerSecret(&quot;CONSUMER-SECRET&quot;);</span><br><span class="line">		try&#123;</span><br><span class="line">			TwitterFactory tf = new TwitterFactory(cb.build());</span><br><span class="line">            Twitter twitter = tf.getInstance();</span><br><span class="line">			</span><br><span class="line">			try&#123;</span><br><span class="line">				RequestToken requestToken = twitter.getOAuthRequestToken();</span><br><span class="line">                System.out.println(&quot;Got request token.&quot;);</span><br><span class="line">                System.out.println(&quot;Request token: &quot; + requestToken.getToken());</span><br><span class="line">                System.out.println(&quot;Request token secret: &quot; + requestToken.getTokenSecret());</span><br><span class="line">                AccessToken accessToken = null;</span><br><span class="line">                </span><br><span class="line">                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">                while(accessToken == null)&#123;</span><br><span class="line">                	System.out.println(&quot;Open the following URL and grant access to your account:&quot;);</span><br><span class="line">                    System.out.println(requestToken.getAuthorizationURL());</span><br><span class="line">                    System.out.print(&quot;Enter the PIN(if available) and hit enter after you granted access.[PIN]:&quot;);</span><br><span class="line">                    String pin = br.readLine();</span><br><span class="line">                    try &#123;</span><br><span class="line">                        if (pin.length() &gt; 0) &#123;</span><br><span class="line">                            accessToken = twitter.getOAuthAccessToken(requestToken, pin);</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            accessToken = twitter.getOAuthAccessToken(requestToken);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; catch (TwitterException te) &#123;</span><br><span class="line">                        if (401 == te.getStatusCode()) &#123;</span><br><span class="line">                            System.out.println(&quot;Unable to get the access token.&quot;);</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            te.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;Got access token.&quot;);</span><br><span class="line">                System.out.println(&quot;Access token: &quot; + accessToken.getToken());</span><br><span class="line">                System.out.println(&quot;Access token secret: &quot; + accessToken.getTokenSecret());</span><br><span class="line">			&#125; catch(IllegalStateException ie)&#123;</span><br><span class="line">				if (!twitter.getAuthorization().isEnabled()) &#123;</span><br><span class="line">                    System.out.println(&quot;OAuth consumer key/secret is not set.&quot;);</span><br><span class="line">                    System.exit(-1);</span><br><span class="line">                &#125;</span><br><span class="line">			&#125;</span><br><span class="line">			Status status = twitter.updateStatus(testStatus);</span><br><span class="line">	        System.out.println(&quot;Successfully updated the status to [&quot; + status.getText() + &quot;].&quot;);</span><br><span class="line">	        System.exit(0);</span><br><span class="line">		&#125; catch (TwitterException te) &#123;</span><br><span class="line">            te.printStackTrace();</span><br><span class="line">            System.out.println(&quot;Failed to get timeline: &quot; + te.getMessage());</span><br><span class="line">            System.exit(-1);</span><br><span class="line">        &#125; catch (IOException ioe) &#123;</span><br><span class="line">            ioe.printStackTrace();</span><br><span class="line">            System.out.println(&quot;Failed to read the system input.&quot;);</span><br><span class="line">            System.exit(-1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>This piece of code can post a twitter from your account, after running this u can see the following instructions.<br><img src="http://img.blog.csdn.net/20161012030205951" alt="Instructions"><br>Just click into the url it mentioned and grant access to your app, and then type in the PIN code that it gives u. After that, u can check ur twitter now.<br><img src="http://img.blog.csdn.net/20161012030038935" alt="Result"></p>
+<h2 id="Use-streaming-API"><a href="#Use-streaming-API" class="headerlink" title="Use streaming API"></a>Use streaming API</h2><p>Here is the code.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.*;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line"></span><br><span class="line">public class PrintSampleStream &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws TwitterException&#123;</span><br><span class="line">		 ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">	        //the following is set without accesstoken- desktop client</span><br><span class="line">	        cb.setDebugEnabled(true)</span><br><span class="line">	        	.setOAuthConsumerKey(&quot;I won&apos;t tell u&quot;)</span><br><span class="line">	        	.setOAuthConsumerSecret(&quot;what my key and secret is&quot;)</span><br><span class="line">	        	.setOAuthAccessToken(&quot;LOL&quot;)</span><br><span class="line">	        	.setOAuthAccessTokenSecret(&quot;:)&quot;);</span><br><span class="line">		</span><br><span class="line">		TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();</span><br><span class="line">	    StatusListener listener = new StatusListener() &#123;</span><br><span class="line">	    	 public void onStatus(Status status) &#123;</span><br><span class="line">	             System.out.println(status.getUser().getName() + &quot; : &quot; + status.getText());</span><br><span class="line">	         &#125;</span><br><span class="line">	         public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) &#123;&#125;</span><br><span class="line">	         public void onTrackLimitationNotice(int numberOfLimitedStatuses) &#123;&#125;</span><br><span class="line">	         public void onException(Exception ex)&#123;</span><br><span class="line">	             ex.printStackTrace();</span><br><span class="line">	         &#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onScrubGeo(long arg0, long arg1) &#123;</span><br><span class="line">				// TODO Auto-generated method stub</span><br><span class="line">			&#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onStallWarning(StallWarning arg0) &#123;</span><br><span class="line">				// TODO Auto-generated method stub			</span><br><span class="line">			&#125;</span><br><span class="line">	     &#125;;</span><br><span class="line">	     twitterStream.addListener(listener);</span><br><span class="line">	     twitterStream.sample();</span><br><span class="line">	     </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>This piece of sample code enables you to fetch tweets from twitter in real-time.</p>
+<h2 id="Fetch-Filtered-Stream"><a href="#Fetch-Filtered-Stream" class="headerlink" title="Fetch Filtered Stream"></a>Fetch Filtered Stream</h2><p>Sometimes, we would like to search information that we are interested in, so we may need to filter the stream so that we can get relevant twitters. The code is shown below.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.*;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class PrintFilteredStream &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws TwitterException &#123;</span><br><span class="line">		String[] keywordsArray = &#123;&quot;iphone&quot;, &quot;samsung&quot;&#125;;</span><br><span class="line">		</span><br><span class="line">		ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">	        //the following is set without accesstoken- desktop client</span><br><span class="line">	    cb.setDebugEnabled(true)</span><br><span class="line">	    	.setOAuthConsumerKey(&quot;CONSUMER-KEY&quot;)</span><br><span class="line">	        .setOAuthConsumerSecret(&quot;CONSUMER-SECRET&quot;)</span><br><span class="line">	        .setOAuthAccessToken(&quot;ACCESS-TOKEN&quot;)</span><br><span class="line">	        .setOAuthAccessTokenSecret(&quot;ACCESS-TOKEN-SECRET&quot;);</span><br><span class="line">		</span><br><span class="line">		//	Implementing StatusListner</span><br><span class="line">		StatusListener listener = new StatusListener() &#123;</span><br><span class="line">			@Override</span><br><span class="line">	    	public void onStatus(Status status) &#123;</span><br><span class="line">	            System.out.println(status.getUser().getName() + &quot; : &quot; + status.getText());</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) &#123;</span><br><span class="line">				System.out.println(&quot;Got a status deletion notice id:&quot; + statusDeletionNotice.getStatusId());</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">	        public void onTrackLimitationNotice(int numberOfLimitedStatuses) &#123;</span><br><span class="line">				System.out.println(&quot;Got track limitation notice:&quot; + numberOfLimitedStatuses);</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">	        public void onException(Exception ex)&#123;</span><br><span class="line">				ex.printStackTrace();</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onScrubGeo(long userId, long upToStatusId) &#123;</span><br><span class="line">				System.out.println(&quot;Got scrub_geo event userId:&quot; + userId + &quot; upToStatusId:&quot; + upToStatusId);</span><br><span class="line">			&#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onStallWarning(StallWarning warning) &#123;</span><br><span class="line">				System.out.println(&quot;Got stall warning:&quot; + warning);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	     </span><br><span class="line">		TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();</span><br><span class="line">		twitterStream.addListener(listener);</span><br><span class="line">		ArrayList&lt;Long&gt; follow = new ArrayList&lt;Long&gt;();</span><br><span class="line">		ArrayList&lt;String&gt; track = new ArrayList&lt;String&gt;();</span><br><span class="line">		for(String arg : keywordsArray)&#123;</span><br><span class="line">			if(isNumericalArgument(arg))&#123;</span><br><span class="line">				for(String id : arg.split(&quot;,&quot;))&#123;</span><br><span class="line">					follow.add(Long.parseLong(id));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				track.addAll(Arrays.asList(arg.split(&quot;,&quot;)));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		long[] followArray = new long[follow.size()];</span><br><span class="line">		for(int i = 0; i &lt; follow.size(); i++)&#123;</span><br><span class="line">			followArray[i] = follow.get(i);</span><br><span class="line">		&#125;</span><br><span class="line">		String[] trackArray = track.toArray(new String[track.size()]);</span><br><span class="line">		twitterStream.filter(new FilterQuery(0, followArray, trackArray));	 </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static boolean isNumericalArgument(String argument)&#123;</span><br><span class="line">		String args[] = argument.split(&quot;,&quot;);</span><br><span class="line">		boolean isNumericalArgument = true;</span><br><span class="line">		for(String arg : args)&#123;</span><br><span class="line">			try&#123;</span><br><span class="line">				Integer.parseInt(arg);</span><br><span class="line">			&#125; catch(NumberFormatException nfe)&#123;</span><br><span class="line">				isNumericalArgument = false;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return isNumericalArgument;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Set-up-elasticsearch-environment"><a href="#Set-up-elasticsearch-environment" class="headerlink" title="Set up elasticsearch environment"></a>Set up elasticsearch environment</h2><ol>
+<li>Go to AWS console and select elasticsearch service(you can also choose to use elasticsearch by downloading and unzipping it from <a href="https://www.elastic.co/" target="_blank" rel="noopener">here</a>)</li>
+<li>Set access police to open access or any way you like, and then use curl to create index using <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html" target="_blank" rel="noopener">index</a> API.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XPUT &apos;http://search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/&apos; -d &apos;&#123;</span><br><span class="line">    &quot;settings&quot; : &#123;</span><br><span class="line">        &quot;index&quot; : &#123;</span><br><span class="line">            &quot;number_of_shards&quot; : 3, </span><br><span class="line">            &quot;number_of_replicas&quot; : 2 </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>this piece of code will create an index named “user” in your AWS domain. </p>
+<ol start="3">
+<li>Next, you are going to create mapping. Here, the mapping called “profile” is created, which has three properties: text, latitude and longitude.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/_mapping/profile -d </span><br><span class="line">&apos;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot; : &#123;</span><br><span class="line">	    &quot;properties&quot; : &#123;</span><br><span class="line">		&quot;text&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;,</span><br><span class="line">		&quot;latitude&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;,</span><br><span class="line">		&quot;longitude&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Upload-data-to-elasticsearch"><a href="#Upload-data-to-elasticsearch" class="headerlink" title="Upload data to elasticsearch"></a>Upload data to elasticsearch</h2><p>To upload data to elasticsearch, you can use the curl command in cygwin, since I am using a windows machine, or put this piece of code into the java program that are fetching twitter. From twitter stream, we can obtain a JSONObject, which could by utilize into uploading to elasticsearch.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">String url = &quot;http://search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/profile&quot;;</span><br><span class="line">HttpClient client = HttpClientBuilder.create().build();</span><br><span class="line">HttpPost put = new HttpPost(url);</span><br><span class="line">put.setHeader(&quot;Content-type&quot;, &quot;application/json&quot;);</span><br><span class="line">StringEntity params =new StringEntity(json.toString());</span><br><span class="line">put.setEntity(params);</span><br><span class="line">HttpResponse response = client.execute(put);</span><br><span class="line">System.out.println(&quot;Response Code:&quot;+response.getStatusLine().getStatusCode());</span><br><span class="line">	</span><br><span class="line">BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));</span><br><span class="line">StringBuffer result = new StringBuffer();</span><br><span class="line">String line = &quot;&quot;;</span><br><span class="line">while ((line = rd.readLine()) != null) &#123;</span><br><span class="line">	result.append(line);</span><br><span class="line">&#125;</span><br><span class="line">							System.out.println(&quot;result:&quot;+result);</span><br></pre></td></tr></table></figure></p>
+<h2 id="UI-for-our-application"><a href="#UI-for-our-application" class="headerlink" title="UI for our application"></a>UI for our application</h2><p><img src="http://img.blog.csdn.net/20161025083341588" alt="Main UI"><br>This is the entry point for our application, you can choose keyword for twitter.<br><img src="http://img.blog.csdn.net/20161025083510465" alt="Google Map"><br>After you choose the keyword and click the “show” button, you can see the corresponding twitter location marked on the map.<br>Every 5 seconds, the front end will refresh and the counter, which can be seen in the second picture as 10, will gradually increase as our backend program continuously fetching data from twitter.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/05/Distributed System/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/05/Distributed System/" itemprop="url">Fundamentals on Large-scale Distributed System</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-05T19:08:04+08:00">
+                2017-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Distributed-System/" itemprop="url" rel="index">
+                    <span itemprop="name">Distributed System</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Course-Notes-on-COMS-W4113"><a href="#Course-Notes-on-COMS-W4113" class="headerlink" title="Course Notes on COMS W4113"></a>Course Notes on COMS W4113</h1><ul>
+<li>website: <a href="https://columbia.github.io/ds1-class/" target="_blank" rel="noopener">https://columbia.github.io/ds1-class/</a></li>
+</ul>
+<h2 id="Challenge-1-large-data-many-users-more-requests"><a href="#Challenge-1-large-data-many-users-more-requests" class="headerlink" title="Challenge 1: large data, many users, more requests"></a>Challenge 1: large data, many users, more requests</h2><p>No single machine can process all data efficiently and we want to enable distribution</p>
+<h2 id="Challenge-2-scaling-is-hard"><a href="#Challenge-2-scaling-is-hard" class="headerlink" title="Challenge 2: scaling is hard"></a>Challenge 2: scaling is hard</h2><p>An system may not scale due to multiple reasons and we want to achieve incremental scalability</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/31/Intellisense in IDE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/31/Intellisense in IDE/" itemprop="url">Intellisense in IDE</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-31T19:08:04+08:00">
+                2017-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Intellisense/" itemprop="url" rel="index">
+                    <span itemprop="name">Intellisense</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>During my internship this summer, our team wants to build a cloud IDE for other developers in the company and I was in charge of the autocompletion feature. It was absolutely a challenge for cause I have done anything related to it at all. So it took me a while to know how the whole system works. Due to security concern, I am not allowed to show you the code. However, this blog can still serve as an introduction and a basic tutorial for those who wants to equip their editor with intellisense.</p>
+<p>Before I proceed to building our own cloud IDE, I did some researches on how IDE liek pycharm or eclipse provide intellisense; and I discovered that most of them make use of the compiler APIs, which provide rich information about the code snippet. In addition, with a more thorough dive into VS Code, I found out a handy tool called Microsoft Language Server Portocol. As I see it, instead of re-building our own interface to different compilers, why not make use of all kinds of existing language servers, which can save us the cost of maintainance. Accordingly, we decide to use Monaco as our editor, which is a core component of VS Code, and luckily, now all I have to do is to build a language client that can communicate with languages servers with jsonrpc.</p>
+<h2 id="To-Be-Continued"><a href="#To-Be-Continued" class="headerlink" title="To Be Continued"></a>To Be Continued</h2><p>blah blah blah</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Phantomape" />
+          <p class="site-author-name" itemprop="name">Phantomape</p>
+           
+              <p class="site-description motion-element" itemprop="description">My personal blog to recode things related to programming</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/ || archive">
+            
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/phantomape" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:cxucheng@outlook.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Phantomape</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

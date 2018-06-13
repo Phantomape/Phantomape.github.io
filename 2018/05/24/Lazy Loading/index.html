@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Lazy Loading," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="I came across lazy loading while building a new feature for our company’s new website. In our page, we have tons of images to load, which is very costly and exerts a very negative user experience. Thu">
+<meta name="keywords" content="Lazy Loading">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lazy Loading">
+<meta property="og:url" content="http://yoursite.com/2018/05/24/Lazy Loading/index.html">
+<meta property="og:site_name" content="Phantomape&#39;s Blog">
+<meta property="og:description" content="I came across lazy loading while building a new feature for our company’s new website. In our page, we have tons of images to load, which is very costly and exerts a very negative user experience. Thu">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://img.blog.csdn.net/20161012030205951">
+<meta property="og:image" content="http://img.blog.csdn.net/20161012030038935">
+<meta property="og:image" content="http://img.blog.csdn.net/20161025083341588">
+<meta property="og:image" content="http://img.blog.csdn.net/20161025083510465">
+<meta property="og:updated_time" content="2018-05-27T04:15:10.334Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lazy Loading">
+<meta name="twitter:description" content="I came across lazy loading while building a new feature for our company’s new website. In our page, we have tons of images to load, which is very costly and exerts a very negative user experience. Thu">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161012030205951">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/24/Lazy Loading/"/>
+
+
+
+
+
+  <title>Lazy Loading | Phantomape's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Phantomape's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hello world</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/Lazy Loading/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lazy Loading</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-24T08:35:04-07:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">Frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>I came across lazy loading while building a new feature for our company’s new website. In our page, we have tons of images to load, which is very costly and exerts a very negative user experience. Thus, we try to use lazy loading to improve the speed of loading the page.<br>To build a twittmap, we need to utilize the twitter API. Here, I chose twitter4j, which is an unofficial Java library for the Twitter API. With Twitter4J, you can easily integrate your Java application with the Twitter service. There are some tutorials here: <a href="https://xmeng.wordpress.com/2011/07/10/how-to-handle-sign-in-with-twitter-using-twitter4j/" title="How to sign in with twitter using twitter4j" target="_blank" rel="noopener">How to “Sign in with Twitter” using twitter4j</a>.</p>
+<h2 id="Register-twitter-app"><a href="#Register-twitter-app" class="headerlink" title="Register twitter app"></a>Register twitter app</h2><p>Click this <a href="https://dev.twitter.com/apps" target="_blank" rel="noopener">link</a>and fill out the following form, it should be fine. Just remember to grant your app access for read and write.</p>
+<h2 id="Include-twitter4j"><a href="#Include-twitter4j" class="headerlink" title="Include twitter4j"></a>Include twitter4j</h2><p>For those who are not familiar with java, it would be a painful process to learn how use new tools at first(I like VS better, lol). Don’t worry, just follow the steps below. </p>
+<ol>
+<li>Download twitter4j from <a href="http://twitter4j.org/en/" target="_blank" rel="noopener">here</a>.</li>
+<li>Unzip it.</li>
+<li>After you create a java project, Right-click on your Java project and Select Properties.</li>
+<li>Choose Java Build Path and select the third tab, Libraries.</li>
+<li>Click add external library and add twitter4j-core-4.0.4.jar.<h2 id="Begin-programming"><a href="#Begin-programming" class="headerlink" title="Begin programming"></a>Begin programming</h2>A lot of examples are available. Here is the sample code used in tutorial mentioned above (Using eclipse).<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.Status;</span><br><span class="line">import twitter4j.Twitter;</span><br><span class="line">import twitter4j.TwitterException;</span><br><span class="line">import twitter4j.TwitterFactory;</span><br><span class="line">import twitter4j.auth.AccessToken;</span><br><span class="line">import twitter4j.auth.RequestToken;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line">import twitter4j.conf.Configuration;</span><br><span class="line"> </span><br><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line">public class FirstClass &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		String testStatus=&quot;Hello from twitter4j&quot;;</span><br><span class="line">		 </span><br><span class="line">        ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">        //the following is set without accesstoken- desktop client</span><br><span class="line">        cb.setDebugEnabled(true)</span><br><span class="line">        	.setOAuthConsumerKey(&quot;CONSUMER-KEY&quot;)</span><br><span class="line">        	.setOAuthConsumerSecret(&quot;CONSUMER-SECRET&quot;);</span><br><span class="line">		try&#123;</span><br><span class="line">			TwitterFactory tf = new TwitterFactory(cb.build());</span><br><span class="line">            Twitter twitter = tf.getInstance();</span><br><span class="line">			</span><br><span class="line">			try&#123;</span><br><span class="line">				RequestToken requestToken = twitter.getOAuthRequestToken();</span><br><span class="line">                System.out.println(&quot;Got request token.&quot;);</span><br><span class="line">                System.out.println(&quot;Request token: &quot; + requestToken.getToken());</span><br><span class="line">                System.out.println(&quot;Request token secret: &quot; + requestToken.getTokenSecret());</span><br><span class="line">                AccessToken accessToken = null;</span><br><span class="line">                </span><br><span class="line">                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">                while(accessToken == null)&#123;</span><br><span class="line">                	System.out.println(&quot;Open the following URL and grant access to your account:&quot;);</span><br><span class="line">                    System.out.println(requestToken.getAuthorizationURL());</span><br><span class="line">                    System.out.print(&quot;Enter the PIN(if available) and hit enter after you granted access.[PIN]:&quot;);</span><br><span class="line">                    String pin = br.readLine();</span><br><span class="line">                    try &#123;</span><br><span class="line">                        if (pin.length() &gt; 0) &#123;</span><br><span class="line">                            accessToken = twitter.getOAuthAccessToken(requestToken, pin);</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            accessToken = twitter.getOAuthAccessToken(requestToken);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; catch (TwitterException te) &#123;</span><br><span class="line">                        if (401 == te.getStatusCode()) &#123;</span><br><span class="line">                            System.out.println(&quot;Unable to get the access token.&quot;);</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            te.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;Got access token.&quot;);</span><br><span class="line">                System.out.println(&quot;Access token: &quot; + accessToken.getToken());</span><br><span class="line">                System.out.println(&quot;Access token secret: &quot; + accessToken.getTokenSecret());</span><br><span class="line">			&#125; catch(IllegalStateException ie)&#123;</span><br><span class="line">				if (!twitter.getAuthorization().isEnabled()) &#123;</span><br><span class="line">                    System.out.println(&quot;OAuth consumer key/secret is not set.&quot;);</span><br><span class="line">                    System.exit(-1);</span><br><span class="line">                &#125;</span><br><span class="line">			&#125;</span><br><span class="line">			Status status = twitter.updateStatus(testStatus);</span><br><span class="line">	        System.out.println(&quot;Successfully updated the status to [&quot; + status.getText() + &quot;].&quot;);</span><br><span class="line">	        System.exit(0);</span><br><span class="line">		&#125; catch (TwitterException te) &#123;</span><br><span class="line">            te.printStackTrace();</span><br><span class="line">            System.out.println(&quot;Failed to get timeline: &quot; + te.getMessage());</span><br><span class="line">            System.exit(-1);</span><br><span class="line">        &#125; catch (IOException ioe) &#123;</span><br><span class="line">            ioe.printStackTrace();</span><br><span class="line">            System.out.println(&quot;Failed to read the system input.&quot;);</span><br><span class="line">            System.exit(-1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>This piece of code can post a twitter from your account, after running this u can see the following instructions.<br><img src="http://img.blog.csdn.net/20161012030205951" alt="Instructions"><br>Just click into the url it mentioned and grant access to your app, and then type in the PIN code that it gives u. After that, u can check ur twitter now.<br><img src="http://img.blog.csdn.net/20161012030038935" alt="Result"></p>
+<h2 id="Use-streaming-API"><a href="#Use-streaming-API" class="headerlink" title="Use streaming API"></a>Use streaming API</h2><p>Here is the code.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.*;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line"></span><br><span class="line">public class PrintSampleStream &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws TwitterException&#123;</span><br><span class="line">		 ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">	        //the following is set without accesstoken- desktop client</span><br><span class="line">	        cb.setDebugEnabled(true)</span><br><span class="line">	        	.setOAuthConsumerKey(&quot;I won&apos;t tell u&quot;)</span><br><span class="line">	        	.setOAuthConsumerSecret(&quot;what my key and secret is&quot;)</span><br><span class="line">	        	.setOAuthAccessToken(&quot;LOL&quot;)</span><br><span class="line">	        	.setOAuthAccessTokenSecret(&quot;:)&quot;);</span><br><span class="line">		</span><br><span class="line">		TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();</span><br><span class="line">	    StatusListener listener = new StatusListener() &#123;</span><br><span class="line">	    	 public void onStatus(Status status) &#123;</span><br><span class="line">	             System.out.println(status.getUser().getName() + &quot; : &quot; + status.getText());</span><br><span class="line">	         &#125;</span><br><span class="line">	         public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) &#123;&#125;</span><br><span class="line">	         public void onTrackLimitationNotice(int numberOfLimitedStatuses) &#123;&#125;</span><br><span class="line">	         public void onException(Exception ex)&#123;</span><br><span class="line">	             ex.printStackTrace();</span><br><span class="line">	         &#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onScrubGeo(long arg0, long arg1) &#123;</span><br><span class="line">				// TODO Auto-generated method stub</span><br><span class="line">			&#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onStallWarning(StallWarning arg0) &#123;</span><br><span class="line">				// TODO Auto-generated method stub			</span><br><span class="line">			&#125;</span><br><span class="line">	     &#125;;</span><br><span class="line">	     twitterStream.addListener(listener);</span><br><span class="line">	     twitterStream.sample();</span><br><span class="line">	     </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>This piece of sample code enables you to fetch tweets from twitter in real-time.</p>
+<h2 id="Fetch-Filtered-Stream"><a href="#Fetch-Filtered-Stream" class="headerlink" title="Fetch Filtered Stream"></a>Fetch Filtered Stream</h2><p>Sometimes, we would like to search information that we are interested in, so we may need to filter the stream so that we can get relevant twitters. The code is shown below.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.*;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class PrintFilteredStream &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws TwitterException &#123;</span><br><span class="line">		String[] keywordsArray = &#123;&quot;iphone&quot;, &quot;samsung&quot;&#125;;</span><br><span class="line">		</span><br><span class="line">		ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">	        //the following is set without accesstoken- desktop client</span><br><span class="line">	    cb.setDebugEnabled(true)</span><br><span class="line">	    	.setOAuthConsumerKey(&quot;CONSUMER-KEY&quot;)</span><br><span class="line">	        .setOAuthConsumerSecret(&quot;CONSUMER-SECRET&quot;)</span><br><span class="line">	        .setOAuthAccessToken(&quot;ACCESS-TOKEN&quot;)</span><br><span class="line">	        .setOAuthAccessTokenSecret(&quot;ACCESS-TOKEN-SECRET&quot;);</span><br><span class="line">		</span><br><span class="line">		//	Implementing StatusListner</span><br><span class="line">		StatusListener listener = new StatusListener() &#123;</span><br><span class="line">			@Override</span><br><span class="line">	    	public void onStatus(Status status) &#123;</span><br><span class="line">	            System.out.println(status.getUser().getName() + &quot; : &quot; + status.getText());</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) &#123;</span><br><span class="line">				System.out.println(&quot;Got a status deletion notice id:&quot; + statusDeletionNotice.getStatusId());</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">	        public void onTrackLimitationNotice(int numberOfLimitedStatuses) &#123;</span><br><span class="line">				System.out.println(&quot;Got track limitation notice:&quot; + numberOfLimitedStatuses);</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">	        public void onException(Exception ex)&#123;</span><br><span class="line">				ex.printStackTrace();</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onScrubGeo(long userId, long upToStatusId) &#123;</span><br><span class="line">				System.out.println(&quot;Got scrub_geo event userId:&quot; + userId + &quot; upToStatusId:&quot; + upToStatusId);</span><br><span class="line">			&#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onStallWarning(StallWarning warning) &#123;</span><br><span class="line">				System.out.println(&quot;Got stall warning:&quot; + warning);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	     </span><br><span class="line">		TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();</span><br><span class="line">		twitterStream.addListener(listener);</span><br><span class="line">		ArrayList&lt;Long&gt; follow = new ArrayList&lt;Long&gt;();</span><br><span class="line">		ArrayList&lt;String&gt; track = new ArrayList&lt;String&gt;();</span><br><span class="line">		for(String arg : keywordsArray)&#123;</span><br><span class="line">			if(isNumericalArgument(arg))&#123;</span><br><span class="line">				for(String id : arg.split(&quot;,&quot;))&#123;</span><br><span class="line">					follow.add(Long.parseLong(id));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				track.addAll(Arrays.asList(arg.split(&quot;,&quot;)));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		long[] followArray = new long[follow.size()];</span><br><span class="line">		for(int i = 0; i &lt; follow.size(); i++)&#123;</span><br><span class="line">			followArray[i] = follow.get(i);</span><br><span class="line">		&#125;</span><br><span class="line">		String[] trackArray = track.toArray(new String[track.size()]);</span><br><span class="line">		twitterStream.filter(new FilterQuery(0, followArray, trackArray));	 </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static boolean isNumericalArgument(String argument)&#123;</span><br><span class="line">		String args[] = argument.split(&quot;,&quot;);</span><br><span class="line">		boolean isNumericalArgument = true;</span><br><span class="line">		for(String arg : args)&#123;</span><br><span class="line">			try&#123;</span><br><span class="line">				Integer.parseInt(arg);</span><br><span class="line">			&#125; catch(NumberFormatException nfe)&#123;</span><br><span class="line">				isNumericalArgument = false;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return isNumericalArgument;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Set-up-elasticsearch-environment"><a href="#Set-up-elasticsearch-environment" class="headerlink" title="Set up elasticsearch environment"></a>Set up elasticsearch environment</h2><ol>
+<li>Go to AWS console and select elasticsearch service(you can also choose to use elasticsearch by downloading and unzipping it from <a href="https://www.elastic.co/" target="_blank" rel="noopener">here</a>)</li>
+<li>Set access police to open access or any way you like, and then use curl to create index using <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html" target="_blank" rel="noopener">index</a> API.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XPUT &apos;http://search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/&apos; -d &apos;&#123;</span><br><span class="line">    &quot;settings&quot; : &#123;</span><br><span class="line">        &quot;index&quot; : &#123;</span><br><span class="line">            &quot;number_of_shards&quot; : 3, </span><br><span class="line">            &quot;number_of_replicas&quot; : 2 </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>this piece of code will create an index named “user” in your AWS domain. </p>
+<ol start="3">
+<li>Next, you are going to create mapping. Here, the mapping called “profile” is created, which has three properties: text, latitude and longitude.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/_mapping/profile -d </span><br><span class="line">&apos;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot; : &#123;</span><br><span class="line">	    &quot;properties&quot; : &#123;</span><br><span class="line">		&quot;text&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;,</span><br><span class="line">		&quot;latitude&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;,</span><br><span class="line">		&quot;longitude&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Upload-data-to-elasticsearch"><a href="#Upload-data-to-elasticsearch" class="headerlink" title="Upload data to elasticsearch"></a>Upload data to elasticsearch</h2><p>To upload data to elasticsearch, you can use the curl command in cygwin, since I am using a windows machine, or put this piece of code into the java program that are fetching twitter. From twitter stream, we can obtain a JSONObject, which could by utilize into uploading to elasticsearch.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">String url = &quot;http://search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/profile&quot;;</span><br><span class="line">HttpClient client = HttpClientBuilder.create().build();</span><br><span class="line">HttpPost put = new HttpPost(url);</span><br><span class="line">put.setHeader(&quot;Content-type&quot;, &quot;application/json&quot;);</span><br><span class="line">StringEntity params =new StringEntity(json.toString());</span><br><span class="line">put.setEntity(params);</span><br><span class="line">HttpResponse response = client.execute(put);</span><br><span class="line">System.out.println(&quot;Response Code:&quot;+response.getStatusLine().getStatusCode());</span><br><span class="line">	</span><br><span class="line">BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));</span><br><span class="line">StringBuffer result = new StringBuffer();</span><br><span class="line">String line = &quot;&quot;;</span><br><span class="line">while ((line = rd.readLine()) != null) &#123;</span><br><span class="line">	result.append(line);</span><br><span class="line">&#125;</span><br><span class="line">							System.out.println(&quot;result:&quot;+result);</span><br></pre></td></tr></table></figure></p>
+<h2 id="UI-for-our-application"><a href="#UI-for-our-application" class="headerlink" title="UI for our application"></a>UI for our application</h2><p><img src="http://img.blog.csdn.net/20161025083341588" alt="Main UI"><br>This is the entry point for our application, you can choose keyword for twitter.<br><img src="http://img.blog.csdn.net/20161025083510465" alt="Google Map"><br>After you choose the keyword and click the “show” button, you can see the corresponding twitter location marked on the map.<br>Every 5 seconds, the front end will refresh and the counter, which can be seen in the second picture as 10, will gradually increase as our backend program continuously fetching data from twitter.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Lazy-Loading/" rel="tag"># Lazy Loading</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/Using react component in twig/" rel="next" title="Using React Component in Twig File">
+                <i class="fa fa-chevron-left"></i> Using React Component in Twig File
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/26/GIL/" rel="prev" title="Global Interpreter Lock(GIL)">
+                Global Interpreter Lock(GIL) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Phantomape" />
+          <p class="site-author-name" itemprop="name">Phantomape</p>
+           
+              <p class="site-description motion-element" itemprop="description">My personal blog to recode things related to programming</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/ || archive">
+            
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/phantomape" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:cxucheng@outlook.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Register-twitter-app"><span class="nav-number">1.</span> <span class="nav-text">Register twitter app</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Include-twitter4j"><span class="nav-number">2.</span> <span class="nav-text">Include twitter4j</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Begin-programming"><span class="nav-number">3.</span> <span class="nav-text">Begin programming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-streaming-API"><span class="nav-number">4.</span> <span class="nav-text">Use streaming API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fetch-Filtered-Stream"><span class="nav-number">5.</span> <span class="nav-text">Fetch Filtered Stream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-up-elasticsearch-environment"><span class="nav-number">6.</span> <span class="nav-text">Set up elasticsearch environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Upload-data-to-elasticsearch"><span class="nav-number">7.</span> <span class="nav-text">Upload data to elasticsearch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UI-for-our-application"><span class="nav-number">8.</span> <span class="nav-text">UI for our application</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Phantomape</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Maths," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="最近利用卡尔曼滤波来做tracking的东西，然后随手推导了一下。网上大都是只有例子源代码和约定俗成的公式，不太方便使用，毕竟不能保证你遇到的问题恰好能用现有模型来套。所以对滤波器的来由需要深刻地理解一下。 （一）Kalman Filter原理定义1.1由 $m\times 1$ 维随机向量 $y\in R^m$ 的线性函数估计 $n\times 1$ 维随机变量 $x\in R^n$ ，估计值记">
+<meta name="keywords" content="Maths">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kalman Filter I(Chinese)">
+<meta property="og:url" content="http://yoursite.com/2018/06/12/Kalman Filter I/index.html">
+<meta property="og:site_name" content="Phantomape&#39;s Blog">
+<meta property="og:description" content="最近利用卡尔曼滤波来做tracking的东西，然后随手推导了一下。网上大都是只有例子源代码和约定俗成的公式，不太方便使用，毕竟不能保证你遇到的问题恰好能用现有模型来套。所以对滤波器的来由需要深刻地理解一下。 （一）Kalman Filter原理定义1.1由 $m\times 1$ 维随机向量 $y\in R^m$ 的线性函数估计 $n\times 1$ 维随机变量 $x\in R^n$ ，估计值记">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-08-28T23:20:01.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kalman Filter I(Chinese)">
+<meta name="twitter:description" content="最近利用卡尔曼滤波来做tracking的东西，然后随手推导了一下。网上大都是只有例子源代码和约定俗成的公式，不太方便使用，毕竟不能保证你遇到的问题恰好能用现有模型来套。所以对滤波器的来由需要深刻地理解一下。 （一）Kalman Filter原理定义1.1由 $m\times 1$ 维随机向量 $y\in R^m$ 的线性函数估计 $n\times 1$ 维随机变量 $x\in R^n$ ，估计值记">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/12/Kalman Filter I/"/>
+
+
+
+
+
+  <title>Kalman Filter I(Chinese) | Phantomape's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Phantomape's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hello world</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/Kalman Filter I/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kalman Filter I(Chinese)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-12T21:37:18-07:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Maths/" itemprop="url" rel="index">
+                    <span itemprop="name">Maths</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近利用卡尔曼滤波来做tracking的东西，然后随手推导了一下。网上大都是只有例子源代码和约定俗成的公式，不太方便使用，毕竟不能保证你遇到的问题恰好能用现有模型来套。所以对滤波器的来由需要深刻地理解一下。</p>
+<h1 id="（一）Kalman-Filter原理"><a href="#（一）Kalman-Filter原理" class="headerlink" title="（一）Kalman Filter原理"></a>（一）Kalman Filter原理</h1><h2 id="定义1-1"><a href="#定义1-1" class="headerlink" title="定义1.1"></a>定义1.1</h2><p>由 $m\times 1$ 维随机向量 $y\in R^m$ 的线性函数估计 $n\times 1$ 维随机变量 $x\in R^n$ ，估计值记为$$    \hat x = b + Ay ,b\in R^n,A\in R^{n\times m}$$若估计值极小化的指标函数为$$    J = E[(x- \hat x)^T(x- \hat x)]$$则称 $\hat x$ 为随机变量的线性最小方差估计。由观测值 $y$ 求随机变量 $x$ 的线性最小方差估计的表达式为<br>$$\hat x = E(x)+Cov(x,y)Var(y)^{-1}(y-E(y))$$虽然这个公式好像好难懂，不过暂时不需要完全理解它，后面在推导时可以慢慢领会。同时这个 $\hat x$ 有三个性质</p>
+<p>（1）无偏性，$E(\hat x) = E(x)$</p>
+<p>（2）正交性，$E[(x-\hat x)y^T] = 0$</p>
+<p>（3）不相关性，$x-\hat x$ 与 $y$ 不相关</p>
+<h2 id="定义1-2"><a href="#定义1-2" class="headerlink" title="定义1.2"></a>定义1.2</h2><p> $x-\hat x$ 与 $y$ 不相关，那么等价于 $x-\hat x$ 与 $y$ 正交（或者理解为垂直），记为 $x-\hat x\bot y$ ，并且称$ \hat x $为 $x$ 在 $y$ 上 的射影，记为$\hat x = proj（x | y） $</p>
+<h2 id="定义1-3"><a href="#定义1-3" class="headerlink" title="定义1.3"></a>定义1.3</h2><p>基于随机变量 $y(1),y(2),…,y(k)\in R^m$，对随机变量 $x\in R^m$ 的线性最小方差估计 $ \hat x$ 定义为$$\hat x = proj(x|w)=proj(x|y(1),y(2),…,y(k))$$也称 $\hat x$ 为 $x$ 在线性流型 $L(w)$ 或 $L(y(1),y(2),…,y(k))$ 上的射影。流型的概念不需要理解，因为后面推导不涉及对它的完全理解</p>
+<h2 id="定义1-4"><a href="#定义1-4" class="headerlink" title="定义1.4"></a>定义1.4</h2><p>设 $y(1),y(2),…,y(k)\in R^m$ 是存在二阶矩的随机序列，它的新息序列（不用纠结名字，其实后面推导里它就是误差序列）定义为<br>$$\epsilon(k)=y(k)-proj(y(k)|y(1),y(2),…,y(k-1)),k =1,2,…$$并定义的一步最优预报估计值为<br>$$\hat y(k|k-1)=proj(y(k)|y(1),y(2),…,y(k-1))$$因此新息序列可重新写成<br>$$\epsilon(k)=y(k)-\hat y(k|k-1),k =1,2,…$$需要规定 $\hat y(1|0)=E[y(1)]$ ，这保证了$E[\epsilon(1)]=0$，所以有$\epsilon(k) \bot L(y(1),y(2),…,y(k-1))$</p>
+<h2 id="定义1-5"><a href="#定义1-5" class="headerlink" title="定义1.5"></a>定义1.5</h2><p>设随机变量 $x\in R^n$ ，随机序列 $y(k)\in R^m$ ，而且随机序列存在二阶矩，则有递推公式（证明以后再补好了(-｡-;)）<br>$$proj(x|y(1),y(2),…,y(k))=proj(x|y(1),y(2),…,y(k-1))+E[x\epsilon^T(k)]{E[\epsilon(k)\epsilon^T(k)]}^{-1}\epsilon(k)$$</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Maths/" rel="tag"># Maths</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/12/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/12/Kalman Filter II/" rel="prev" title="Kalman Filter II(Chinese)">
+                Kalman Filter II(Chinese) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Phantomape" />
+          <p class="site-author-name" itemprop="name">Phantomape</p>
+           
+              <p class="site-description motion-element" itemprop="description">My personal blog to recode things related to programming</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/ || archive">
+            
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/phantomape" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:cxucheng@outlook.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#（一）Kalman-Filter原理"><span class="nav-number">1.</span> <span class="nav-text">（一）Kalman Filter原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义1-1"><span class="nav-number">1.1.</span> <span class="nav-text">定义1.1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义1-2"><span class="nav-number">1.2.</span> <span class="nav-text">定义1.2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义1-3"><span class="nav-number">1.3.</span> <span class="nav-text">定义1.3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义1-4"><span class="nav-number">1.4.</span> <span class="nav-text">定义1.4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义1-5"><span class="nav-number">1.5.</span> <span class="nav-text">定义1.5</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Phantomape</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
