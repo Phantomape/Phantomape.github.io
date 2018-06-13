@@ -308,6 +308,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/Kafka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/28/Kafka/" itemprop="url">Introduction to Kafka</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-28T19:08:04+08:00">
+                2017-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Cloud-Computing/" itemprop="url" rel="index">
+                    <span itemprop="name">Cloud Computing</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="About-Kafka"><a href="#About-Kafka" class="headerlink" title="About Kafka"></a>About Kafka</h2><h4 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h4><p>Kafka is a distributed messaging system for collecting and delivering high volumes of log data with low latency.  On the one hand, Kafka is distributed and scalable, and offers high throughput. On the other hand, Kafka provides an API similar to a messaging system and allows applications to consume log events in real time</p>
+<h4 id="Traditional-Messaging-System"><a href="#Traditional-Messaging-System" class="headerlink" title="Traditional Messaging System"></a>Traditional Messaging System</h4><p>Traditional enterprise messaging systems are not to be a good fit for log processing. The reason is as follows:</p>
+<ol>
+<li>There is a mismatch in features offered by enterprise systems like out of order and unneeded features</li>
+<li>Many systems do not focus as strongly on throughput as their primary design constraint like no batch operations</li>
+<li>Weak in distributed support</li>
+<li>Many messaging systems assume near immediate consumption of messages, so the queue of unconsumed messages is always fairly small.<h4 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h4>A stream of messages of a particular type is defined by a topic. To balance load, a topic is divided into multiple partitions and each broker stores one or more of those partitions. A producer can publish messages to a topic. The published messages are then stored at a set of servers called brokers. A consumer can subscribe to one or more topics from the brokers, and consume the subscribed messages by pulling data from the brokers<br><img src="http://img.blog.csdn.net/20161206045920225" alt="Kafka Architecture"><h5 id="1-Efficiency-on-Single-Partition"><a href="#1-Efficiency-on-Single-Partition" class="headerlink" title="1.    Efficiency on Single Partition"></a>1.    Efficiency on Single Partition</h5></li>
+</ol>
+<ul>
+<li>Simple Storage:<br>Every time a producer publishes a message to a partition, the broker simply appends the message to the last segment file. The segment files are written to disk only after a configurable number of messages have been published or a certain amount of time has elapsed. A message is only exposed to the consumers after it is flushed and a message stored in Kafka does not have an explicit message id. Instead, each message is addressed by its logical offset in the log.<br><img src="http://img.blog.csdn.net/20161206050018554" alt="Kafka Log"></li>
+<li>Efficient Transfer:<br>Avoid explicitly caching messages in memory at the Kafka layer. Instead, cache them on the underlying file system page cache, which avoids double buffering.  Since Kafka does not cache messages in process at all, it has very little overhead in garbage collecting its memory, making efficient implementation in a VM-based language feasible. Plus, Kafka is a multi-subscriber system and a single message may be consumed multiple times by different consumer applications</li>
+<li>Stateless Broker:<br>The volume of info consumed is stored in consumer, which reduce complexity and the overhead on the broker. A message is automatically deleted if it has been retained in the broker longer than a certain period, typically 7 days; thus, A consumer can deliberately rewind back to an old offset and re-consume data. <h5 id="2-Distributed-Coordination"><a href="#2-Distributed-Coordination" class="headerlink" title="2.    Distributed Coordination"></a>2.    Distributed Coordination</h5></li>
+<li>A partition within a topic is the smallest unit of parallelism. Kafka has the concept of consumer groups. Each consumer group consists of one or more consumers that jointly consume a set of subscribed topics, and each message is delivered to only one of the consumers within the group. </li>
+<li>Not having a central “master” node, but instead let consumers coordinate among themselves in a decentralized fashion. To facilitate the coordination, we employ a highly available consensus service Zookeeper. Zookeeper has a very simple, file system like API and it has the following functions:<blockquote>
+<p>   Zookeeper can create a path, set the value of a path, read the value of a path, delete a path, and list the children of a path. It does a few more interesting things: (a) one can register a watcher on a path and get notified when the children of a path or the value of a path has changed; (b) a path can be created as ephemeral (as oppose to persistent), which means that if the creating client is gone, the path is automatically removed by the Zookeeper server; (c) zookeeper replicates its data to multiple servers, which makes the data highly reliable and available. Kafka uses Zookeeper for the following tasks: (1) detecting the addition and the removal of brokers and consumers, (2) triggering a rebalance process in each consumer when the above events happen, and (3) maintaining the consumption relationship and keeping track of the consumed offset of each partition</p>
+</blockquote>
+<h5 id="3-Delivery-Guarantees"><a href="#3-Delivery-Guarantees" class="headerlink" title="3.    Delivery Guarantees"></a>3.    Delivery Guarantees</h5></li>
+<li>In general, Kafka only guarantees at-least-once delivery</li>
+<li>Kafka guarantees that messages from a single partition are delivered to a consumer in order</li>
+</ul>
+<h2 id="Install-Kafka"><a href="#Install-Kafka" class="headerlink" title="Install Kafka"></a>Install Kafka</h2><p>Download and extract Kafka from <a href="http://kafka.apache.org/downloads.html" target="_blank" rel="noopener">http://kafka.apache.org/downloads.html</a>. For me, I have unzipped it in C:\Kafka</p>
+<h2 id="Set-Up-Kafka"><a href="#Set-Up-Kafka" class="headerlink" title="Set Up Kafka"></a>Set Up Kafka</h2><ol>
+<li>Go to your Kafka config directory. For me its C:\Kafka\kafka_2.11-0.10.1.0\config</li>
+<li>Edit file “server.properties”</li>
+<li>Find &amp; edit line “log.dirs=/tmp/kafka-logs” to “log.dir= C:\Kafka\kafka_2.11-0.10.1.0\kafka-logs”.(Actually it doesn’t matter where you put your log)</li>
+<li>If your Zookeeper is running on some other machine or cluster you can edit “zookeeper.connect:2181” to your custom IP and port. For this demo we are using same machine so no need to change. Also Kafka port &amp; broker.id are configurable in this file. Leave other settings as it is.</li>
+<li>Your Kafka will run on default port 9092 &amp; connect to zookeeper’s default port which is 2181.<h2 id="Run-Kafka-Server"><a href="#Run-Kafka-Server" class="headerlink" title="Run Kafka Server"></a>Run Kafka Server</h2></li>
+<li>Go to your Kafka installation directory C:\Kafka\kafka_2.11-0.10.1.0\</li>
+<li>Open a command prompt here by pressing Shift + right click and choose “Open command window here” option)</li>
+<li>Now type .\bin\windows\kafka-server-start.bat .\config\server.properties and press Enter.(Before you run Kafka server, make sure you have opened ZooKeeper)<br><img src="http://img.blog.csdn.net/20161115055337719" alt="Kafka"></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/Install Caffe on Ubuntu 14/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -410,342 +582,6 @@
 <h2 id="Install-ffmpeg-Optional"><a href="#Install-ffmpeg-Optional" class="headerlink" title="Install ffmpeg(Optional)"></a>Install ffmpeg(Optional)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:mc3man/trusty-media</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get dist-upgrade</span><br><span class="line">sudo apt-get install ffmpeg</span><br></pre></td></tr></table></figure>
 <h2 id="Install-Caffe"><a href="#Install-Caffe" class="headerlink" title="Install Caffe"></a>Install Caffe</h2><p>Modify Makefile.config<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">## Refer to http://caffe.berkeleyvision.org/installation.html</span><br><span class="line"># Contributions simplifying and improving our build system are welcome!</span><br><span class="line"></span><br><span class="line"># cuDNN acceleration switch (uncomment to build with cuDNN).</span><br><span class="line">USE_CUDNN := 1</span><br><span class="line"></span><br><span class="line"># CPU-only switch (uncomment to build without GPU support).</span><br><span class="line"># CPU_ONLY := 1</span><br><span class="line"></span><br><span class="line"># uncomment to disable IO dependencies and corresponding data layers</span><br><span class="line"># USE_OPENCV := 0</span><br><span class="line"># USE_LEVELDB := 0</span><br><span class="line"># USE_LMDB := 0</span><br><span class="line"></span><br><span class="line"># uncomment to allow MDB_NOLOCK when reading LMDB files (only if necessary)</span><br><span class="line">#	You should not set this flag if you will be reading LMDBs with any</span><br><span class="line">#	possibility of simultaneous read and write</span><br><span class="line"># ALLOW_LMDB_NOLOCK := 1</span><br><span class="line"></span><br><span class="line"># Uncomment if you&apos;re using OpenCV 3</span><br><span class="line"># OPENCV_VERSION := 3</span><br><span class="line"></span><br><span class="line"># To customize your choice of compiler, uncomment and set the following.</span><br><span class="line"># N.B. the default for Linux is g++ and the default for OSX is clang++</span><br><span class="line"># CUSTOM_CXX := g++</span><br><span class="line"></span><br><span class="line"># CUDA directory contains bin/ and lib/ directories that we need.</span><br><span class="line">CUDA_DIR := /usr/local/cuda</span><br><span class="line"># On Ubuntu 14.04, if cuda tools are installed via</span><br><span class="line"># &quot;sudo apt-get install nvidia-cuda-toolkit&quot; then use this instead:</span><br><span class="line"># CUDA_DIR := /usr</span><br><span class="line"></span><br><span class="line"># CUDA architecture setting: going with all of them.</span><br><span class="line"># For CUDA &lt; 6.0, comment the *_50 through *_61 lines for compatibility.</span><br><span class="line"># For CUDA &lt; 8.0, comment the *_60 and *_61 lines for compatibility.</span><br><span class="line">CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \</span><br><span class="line">		-gencode arch=compute_20,code=sm_21 \</span><br><span class="line">		-gencode arch=compute_30,code=sm_30 \</span><br><span class="line">		-gencode arch=compute_35,code=sm_35 \</span><br><span class="line">		-gencode arch=compute_50,code=sm_50 \</span><br><span class="line">		-gencode arch=compute_52,code=sm_52 \</span><br><span class="line">		-gencode arch=compute_60,code=sm_60 \</span><br><span class="line">		-gencode arch=compute_61,code=sm_61 \</span><br><span class="line">		-gencode arch=compute_61,code=compute_61</span><br><span class="line"></span><br><span class="line"># BLAS choice:</span><br><span class="line"># atlas for ATLAS (default)</span><br><span class="line"># mkl for MKL</span><br><span class="line"># open for OpenBlas</span><br><span class="line">BLAS := atlas</span><br><span class="line"># Custom (MKL/ATLAS/OpenBLAS) include and lib directories.</span><br><span class="line"># Leave commented to accept the defaults for your choice of BLAS</span><br><span class="line"># (which should work)!</span><br><span class="line"># BLAS_INCLUDE := /path/to/your/blas</span><br><span class="line"># BLAS_LIB := /path/to/your/blas</span><br><span class="line"></span><br><span class="line"># Homebrew puts openblas in a directory that is not on the standard search path</span><br><span class="line"># BLAS_INCLUDE := $(shell brew --prefix openblas)/include</span><br><span class="line"># BLAS_LIB := $(shell brew --prefix openblas)/lib</span><br><span class="line"></span><br><span class="line"># This is required only if you will compile the matlab interface.</span><br><span class="line"># MATLAB directory should contain the mex binary in /bin.</span><br><span class="line"># MATLAB_DIR := /usr/local</span><br><span class="line"># MATLAB_DIR := /Applications/MATLAB_R2012b.app</span><br><span class="line"></span><br><span class="line"># NOTE: this is required only if you will compile the python interface.</span><br><span class="line"># We need to be able to find Python.h and numpy/arrayobject.h.</span><br><span class="line"># PYTHON_INCLUDE := /usr/include/python2.7 \</span><br><span class="line"># 		/usr/lib/python2.7/dist-packages/numpy/core/include</span><br><span class="line"># Anaconda Python distribution is quite popular. Include path:</span><br><span class="line"># Verify anaconda location, sometimes it&apos;s in root.</span><br><span class="line">ANACONDA_HOME := $(HOME)/anaconda</span><br><span class="line">PYTHON_INCLUDE := $(ANACONDA_HOME)/include \</span><br><span class="line">		$(ANACONDA_HOME)/include/python2.7 \</span><br><span class="line">		$(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include</span><br><span class="line"></span><br><span class="line"># Uncomment to use Python 3 (default is Python 2)</span><br><span class="line"># PYTHON_LIBRARIES := boost_python3 python3.5m</span><br><span class="line"># PYTHON_INCLUDE := /usr/include/python3.5m \</span><br><span class="line">#                 /usr/lib/python3.5/dist-packages/numpy/core/include</span><br><span class="line"></span><br><span class="line"># We need to be able to find libpythonX.X.so or .dylib.</span><br><span class="line"># PYTHON_LIB := /usr/lib</span><br><span class="line">PYTHON_LIB := $(ANACONDA_HOME)/lib</span><br><span class="line"></span><br><span class="line"># Homebrew installs numpy in a non standard path (keg only)</span><br><span class="line"># PYTHON_INCLUDE += $(dir $(shell python -c &apos;import numpy.core; print(numpy.core.__file__)&apos;))/include</span><br><span class="line"># PYTHON_LIB += $(shell brew --prefix numpy)/lib</span><br><span class="line"></span><br><span class="line"># Uncomment to support layers written in Python (will link against Python libs)</span><br><span class="line"># WITH_PYTHON_LAYER := 1</span><br><span class="line"></span><br><span class="line"># Whatever else you find you need goes here.</span><br><span class="line">INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include</span><br><span class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib</span><br><span class="line"></span><br><span class="line"># If Homebrew is installed at a non standard location (for example your home directory) and you use it for general dependencies</span><br><span class="line"># INCLUDE_DIRS += $(shell brew --prefix)/include</span><br><span class="line"># LIBRARY_DIRS += $(shell brew --prefix)/lib</span><br><span class="line"></span><br><span class="line"># NCCL acceleration switch (uncomment to build with NCCL)</span><br><span class="line"># https://github.com/NVIDIA/nccl (last tested version: v1.2.3-1+cuda8.0)</span><br><span class="line"># USE_NCCL := 1</span><br><span class="line"></span><br><span class="line"># Uncomment to use `pkg-config` to specify OpenCV library paths.</span><br><span class="line"># (Usually not necessary -- OpenCV libraries are normally installed in one of the above $LIBRARY_DIRS.)</span><br><span class="line">USE_PKG_CONFIG := 1</span><br><span class="line"></span><br><span class="line"># N.B. both build and distribute dirs are cleared on `make clean`</span><br><span class="line">BUILD_DIR := build</span><br><span class="line">DISTRIBUTE_DIR := distribute</span><br><span class="line"></span><br><span class="line"># Uncomment for debugging. Does not work on OSX due to https://github.com/BVLC/caffe/issues/171</span><br><span class="line"># DEBUG := 1</span><br><span class="line"></span><br><span class="line"># The ID of the GPU that &apos;make runtest&apos; will use to run unit tests.</span><br><span class="line">TEST_GPUID := 0</span><br><span class="line"></span><br><span class="line"># enable pretty build (comment to see full commands)</span><br><span class="line">Q ?= @</span><br></pre></td></tr></table></figure></p>
 <p>and then run<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">make all -j8</span><br><span class="line">make test -j8</span><br><span class="line">make runtest</span><br><span class="line">make pycaffe</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/Computational Aspects of Robotics/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Phantomape">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Phantomape's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/28/Computational Aspects of Robotics/" itemprop="url">Computational Aspects of Robotics</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-28T19:08:04+08:00">
-                2017-08-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Robotics/" itemprop="url" rel="index">
-                    <span itemprop="name">Robotics</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Course-Notes-on-COMS-W4733"><a href="#Course-Notes-on-COMS-W4733" class="headerlink" title="Course Notes on COMS W4733"></a>Course Notes on COMS W4733</h1><p>textbook: Introduction to autonomous mobile robots 2nd edition<br>course website: <a href="http://www.cs.columbia.edu/~allen/F17/about.html" target="_blank" rel="noopener">www.cs.columbia.edu/~allen/F17/about.html</a></p>
-<p>No midterm</p>
-<h2 id="Locomotion"><a href="#Locomotion" class="headerlink" title="Locomotion"></a>Locomotion</h2><p>Owing to limitations, mobile robots generally locomote either using wheeled<br>mechanisms.</p>
-<h3 id="Key-Issues-for-Locomotion"><a href="#Key-Issues-for-Locomotion" class="headerlink" title="Key Issues for Locomotion"></a>Key Issues for Locomotion</h3><ul>
-<li>stability</li>
-<li>characteristics of contact</li>
-<li>type of environment</li>
-</ul>
-<h3 id="Legged-Mobile-Robots"><a href="#Legged-Mobile-Robots" class="headerlink" title="Legged Mobile Robots"></a>Legged Mobile Robots</h3><p>Characterized by a series of point contacts between the robot and the ground. For a mobile robot<br>with legs, the total number of distinct event sequences for a walking machine is<br>$$N = (2k - 1)!$$</p>
-<h4 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h4><ul>
-<li>adaptability and maneuverability in rough terrain</li>
-<li>capable of crossing a hole or chasm so long as its reach<br>exceeds the width of the hole</li>
-</ul>
-<h4 id="Disadvantages"><a href="#Disadvantages" class="headerlink" title="Disadvantages"></a>Disadvantages</h4><ul>
-<li>power and mechanical complexity</li>
-<li>high maneuverability will only be achieved if the legs have a sufficient number of degrees of freedom to impart forces in a number of different directions</li>
-</ul>
-<h3 id="Wheeled-Mobile-Robots"><a href="#Wheeled-Mobile-Robots" class="headerlink" title="Wheeled Mobile Robots"></a>Wheeled Mobile Robots</h3><h4 id="Advantages-1"><a href="#Advantages-1" class="headerlink" title="Advantages"></a>Advantages</h4><ul>
-<li>good efficiency</li>
-<li>no balance issues</li>
-</ul>
-<h4 id="Disadvantages-1"><a href="#Disadvantages-1" class="headerlink" title="Disadvantages"></a>Disadvantages</h4><ul>
-<li>traction</li>
-<li>stability</li>
-<li>maneuverability</li>
-</ul>
-<h3 id="Aerial-Mobile-Robots"><a href="#Aerial-Mobile-Robots" class="headerlink" title="Aerial Mobile Robots"></a>Aerial Mobile Robots</h3><p>(I guess I need to post some photos in the future)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/Twitter Map/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Phantomape">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Phantomape's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/28/Twitter Map/" itemprop="url">Twitter Map</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-28T19:08:04+08:00">
-                2017-08-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Cloud-Computing/" itemprop="url" rel="index">
-                    <span itemprop="name">Cloud Computing</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>To build a twittmap, we need to utilize the twitter API. Here, I chose twitter4j, which is an unofficial Java library for the Twitter API. With Twitter4J, you can easily integrate your Java application with the Twitter service. There are some tutorials here: <a href="https://xmeng.wordpress.com/2011/07/10/how-to-handle-sign-in-with-twitter-using-twitter4j/" title="How to sign in with twitter using twitter4j" target="_blank" rel="noopener">How to “Sign in with Twitter” using twitter4j</a>.</p>
-<h2 id="Register-twitter-app"><a href="#Register-twitter-app" class="headerlink" title="Register twitter app"></a>Register twitter app</h2><p>Click this <a href="https://dev.twitter.com/apps" target="_blank" rel="noopener">link</a>and fill out the following form, it should be fine. Just remember to grant your app access for read and write.</p>
-<h2 id="Include-twitter4j"><a href="#Include-twitter4j" class="headerlink" title="Include twitter4j"></a>Include twitter4j</h2><p>For those who are not familiar with java, it would be a painful process to learn how use new tools at first(I like VS better, lol). Don’t worry, just follow the steps below. </p>
-<ol>
-<li>Download twitter4j from <a href="http://twitter4j.org/en/" target="_blank" rel="noopener">here</a>.</li>
-<li>Unzip it.</li>
-<li>After you create a java project, Right-click on your Java project and Select Properties.</li>
-<li>Choose Java Build Path and select the third tab, Libraries.</li>
-<li>Click add external library and add twitter4j-core-4.0.4.jar.<h2 id="Begin-programming"><a href="#Begin-programming" class="headerlink" title="Begin programming"></a>Begin programming</h2>A lot of examples are available. Here is the sample code used in tutorial mentioned above (Using eclipse).<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.Status;</span><br><span class="line">import twitter4j.Twitter;</span><br><span class="line">import twitter4j.TwitterException;</span><br><span class="line">import twitter4j.TwitterFactory;</span><br><span class="line">import twitter4j.auth.AccessToken;</span><br><span class="line">import twitter4j.auth.RequestToken;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line">import twitter4j.conf.Configuration;</span><br><span class="line"> </span><br><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line">public class FirstClass &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		String testStatus=&quot;Hello from twitter4j&quot;;</span><br><span class="line">		 </span><br><span class="line">        ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">        //the following is set without accesstoken- desktop client</span><br><span class="line">        cb.setDebugEnabled(true)</span><br><span class="line">        	.setOAuthConsumerKey(&quot;CONSUMER-KEY&quot;)</span><br><span class="line">        	.setOAuthConsumerSecret(&quot;CONSUMER-SECRET&quot;);</span><br><span class="line">		try&#123;</span><br><span class="line">			TwitterFactory tf = new TwitterFactory(cb.build());</span><br><span class="line">            Twitter twitter = tf.getInstance();</span><br><span class="line">			</span><br><span class="line">			try&#123;</span><br><span class="line">				RequestToken requestToken = twitter.getOAuthRequestToken();</span><br><span class="line">                System.out.println(&quot;Got request token.&quot;);</span><br><span class="line">                System.out.println(&quot;Request token: &quot; + requestToken.getToken());</span><br><span class="line">                System.out.println(&quot;Request token secret: &quot; + requestToken.getTokenSecret());</span><br><span class="line">                AccessToken accessToken = null;</span><br><span class="line">                </span><br><span class="line">                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">                while(accessToken == null)&#123;</span><br><span class="line">                	System.out.println(&quot;Open the following URL and grant access to your account:&quot;);</span><br><span class="line">                    System.out.println(requestToken.getAuthorizationURL());</span><br><span class="line">                    System.out.print(&quot;Enter the PIN(if available) and hit enter after you granted access.[PIN]:&quot;);</span><br><span class="line">                    String pin = br.readLine();</span><br><span class="line">                    try &#123;</span><br><span class="line">                        if (pin.length() &gt; 0) &#123;</span><br><span class="line">                            accessToken = twitter.getOAuthAccessToken(requestToken, pin);</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            accessToken = twitter.getOAuthAccessToken(requestToken);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; catch (TwitterException te) &#123;</span><br><span class="line">                        if (401 == te.getStatusCode()) &#123;</span><br><span class="line">                            System.out.println(&quot;Unable to get the access token.&quot;);</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            te.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;Got access token.&quot;);</span><br><span class="line">                System.out.println(&quot;Access token: &quot; + accessToken.getToken());</span><br><span class="line">                System.out.println(&quot;Access token secret: &quot; + accessToken.getTokenSecret());</span><br><span class="line">			&#125; catch(IllegalStateException ie)&#123;</span><br><span class="line">				if (!twitter.getAuthorization().isEnabled()) &#123;</span><br><span class="line">                    System.out.println(&quot;OAuth consumer key/secret is not set.&quot;);</span><br><span class="line">                    System.exit(-1);</span><br><span class="line">                &#125;</span><br><span class="line">			&#125;</span><br><span class="line">			Status status = twitter.updateStatus(testStatus);</span><br><span class="line">	        System.out.println(&quot;Successfully updated the status to [&quot; + status.getText() + &quot;].&quot;);</span><br><span class="line">	        System.exit(0);</span><br><span class="line">		&#125; catch (TwitterException te) &#123;</span><br><span class="line">            te.printStackTrace();</span><br><span class="line">            System.out.println(&quot;Failed to get timeline: &quot; + te.getMessage());</span><br><span class="line">            System.exit(-1);</span><br><span class="line">        &#125; catch (IOException ioe) &#123;</span><br><span class="line">            ioe.printStackTrace();</span><br><span class="line">            System.out.println(&quot;Failed to read the system input.&quot;);</span><br><span class="line">            System.exit(-1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>This piece of code can post a twitter from your account, after running this u can see the following instructions.<br><img src="http://img.blog.csdn.net/20161012030205951" alt="Instructions"><br>Just click into the url it mentioned and grant access to your app, and then type in the PIN code that it gives u. After that, u can check ur twitter now.<br><img src="http://img.blog.csdn.net/20161012030038935" alt="Result"></p>
-<h2 id="Use-streaming-API"><a href="#Use-streaming-API" class="headerlink" title="Use streaming API"></a>Use streaming API</h2><p>Here is the code.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.*;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line"></span><br><span class="line">public class PrintSampleStream &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws TwitterException&#123;</span><br><span class="line">		 ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">	        //the following is set without accesstoken- desktop client</span><br><span class="line">	        cb.setDebugEnabled(true)</span><br><span class="line">	        	.setOAuthConsumerKey(&quot;I won&apos;t tell u&quot;)</span><br><span class="line">	        	.setOAuthConsumerSecret(&quot;what my key and secret is&quot;)</span><br><span class="line">	        	.setOAuthAccessToken(&quot;LOL&quot;)</span><br><span class="line">	        	.setOAuthAccessTokenSecret(&quot;:)&quot;);</span><br><span class="line">		</span><br><span class="line">		TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();</span><br><span class="line">	    StatusListener listener = new StatusListener() &#123;</span><br><span class="line">	    	 public void onStatus(Status status) &#123;</span><br><span class="line">	             System.out.println(status.getUser().getName() + &quot; : &quot; + status.getText());</span><br><span class="line">	         &#125;</span><br><span class="line">	         public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) &#123;&#125;</span><br><span class="line">	         public void onTrackLimitationNotice(int numberOfLimitedStatuses) &#123;&#125;</span><br><span class="line">	         public void onException(Exception ex)&#123;</span><br><span class="line">	             ex.printStackTrace();</span><br><span class="line">	         &#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onScrubGeo(long arg0, long arg1) &#123;</span><br><span class="line">				// TODO Auto-generated method stub</span><br><span class="line">			&#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onStallWarning(StallWarning arg0) &#123;</span><br><span class="line">				// TODO Auto-generated method stub			</span><br><span class="line">			&#125;</span><br><span class="line">	     &#125;;</span><br><span class="line">	     twitterStream.addListener(listener);</span><br><span class="line">	     twitterStream.sample();</span><br><span class="line">	     </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>This piece of sample code enables you to fetch tweets from twitter in real-time.</p>
-<h2 id="Fetch-Filtered-Stream"><a href="#Fetch-Filtered-Stream" class="headerlink" title="Fetch Filtered Stream"></a>Fetch Filtered Stream</h2><p>Sometimes, we would like to search information that we are interested in, so we may need to filter the stream so that we can get relevant twitters. The code is shown below.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.*;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class PrintFilteredStream &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws TwitterException &#123;</span><br><span class="line">		String[] keywordsArray = &#123;&quot;iphone&quot;, &quot;samsung&quot;&#125;;</span><br><span class="line">		</span><br><span class="line">		ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">	        //the following is set without accesstoken- desktop client</span><br><span class="line">	    cb.setDebugEnabled(true)</span><br><span class="line">	    	.setOAuthConsumerKey(&quot;CONSUMER-KEY&quot;)</span><br><span class="line">	        .setOAuthConsumerSecret(&quot;CONSUMER-SECRET&quot;)</span><br><span class="line">	        .setOAuthAccessToken(&quot;ACCESS-TOKEN&quot;)</span><br><span class="line">	        .setOAuthAccessTokenSecret(&quot;ACCESS-TOKEN-SECRET&quot;);</span><br><span class="line">		</span><br><span class="line">		//	Implementing StatusListner</span><br><span class="line">		StatusListener listener = new StatusListener() &#123;</span><br><span class="line">			@Override</span><br><span class="line">	    	public void onStatus(Status status) &#123;</span><br><span class="line">	            System.out.println(status.getUser().getName() + &quot; : &quot; + status.getText());</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) &#123;</span><br><span class="line">				System.out.println(&quot;Got a status deletion notice id:&quot; + statusDeletionNotice.getStatusId());</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">	        public void onTrackLimitationNotice(int numberOfLimitedStatuses) &#123;</span><br><span class="line">				System.out.println(&quot;Got track limitation notice:&quot; + numberOfLimitedStatuses);</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">	        public void onException(Exception ex)&#123;</span><br><span class="line">				ex.printStackTrace();</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onScrubGeo(long userId, long upToStatusId) &#123;</span><br><span class="line">				System.out.println(&quot;Got scrub_geo event userId:&quot; + userId + &quot; upToStatusId:&quot; + upToStatusId);</span><br><span class="line">			&#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onStallWarning(StallWarning warning) &#123;</span><br><span class="line">				System.out.println(&quot;Got stall warning:&quot; + warning);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	     </span><br><span class="line">		TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();</span><br><span class="line">		twitterStream.addListener(listener);</span><br><span class="line">		ArrayList&lt;Long&gt; follow = new ArrayList&lt;Long&gt;();</span><br><span class="line">		ArrayList&lt;String&gt; track = new ArrayList&lt;String&gt;();</span><br><span class="line">		for(String arg : keywordsArray)&#123;</span><br><span class="line">			if(isNumericalArgument(arg))&#123;</span><br><span class="line">				for(String id : arg.split(&quot;,&quot;))&#123;</span><br><span class="line">					follow.add(Long.parseLong(id));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				track.addAll(Arrays.asList(arg.split(&quot;,&quot;)));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		long[] followArray = new long[follow.size()];</span><br><span class="line">		for(int i = 0; i &lt; follow.size(); i++)&#123;</span><br><span class="line">			followArray[i] = follow.get(i);</span><br><span class="line">		&#125;</span><br><span class="line">		String[] trackArray = track.toArray(new String[track.size()]);</span><br><span class="line">		twitterStream.filter(new FilterQuery(0, followArray, trackArray));	 </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static boolean isNumericalArgument(String argument)&#123;</span><br><span class="line">		String args[] = argument.split(&quot;,&quot;);</span><br><span class="line">		boolean isNumericalArgument = true;</span><br><span class="line">		for(String arg : args)&#123;</span><br><span class="line">			try&#123;</span><br><span class="line">				Integer.parseInt(arg);</span><br><span class="line">			&#125; catch(NumberFormatException nfe)&#123;</span><br><span class="line">				isNumericalArgument = false;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return isNumericalArgument;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Set-up-elasticsearch-environment"><a href="#Set-up-elasticsearch-environment" class="headerlink" title="Set up elasticsearch environment"></a>Set up elasticsearch environment</h2><ol>
-<li>Go to AWS console and select elasticsearch service(you can also choose to use elasticsearch by downloading and unzipping it from <a href="https://www.elastic.co/" target="_blank" rel="noopener">here</a>)</li>
-<li>Set access police to open access or any way you like, and then use curl to create index using <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html" target="_blank" rel="noopener">index</a> API.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XPUT &apos;http://search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/&apos; -d &apos;&#123;</span><br><span class="line">    &quot;settings&quot; : &#123;</span><br><span class="line">        &quot;index&quot; : &#123;</span><br><span class="line">            &quot;number_of_shards&quot; : 3, </span><br><span class="line">            &quot;number_of_replicas&quot; : 2 </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>this piece of code will create an index named “user” in your AWS domain. </p>
-<ol start="3">
-<li>Next, you are going to create mapping. Here, the mapping called “profile” is created, which has three properties: text, latitude and longitude.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/_mapping/profile -d </span><br><span class="line">&apos;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot; : &#123;</span><br><span class="line">	    &quot;properties&quot; : &#123;</span><br><span class="line">		&quot;text&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;,</span><br><span class="line">		&quot;latitude&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;,</span><br><span class="line">		&quot;longitude&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&apos;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="Upload-data-to-elasticsearch"><a href="#Upload-data-to-elasticsearch" class="headerlink" title="Upload data to elasticsearch"></a>Upload data to elasticsearch</h2><p>To upload data to elasticsearch, you can use the curl command in cygwin, since I am using a windows machine, or put this piece of code into the java program that are fetching twitter. From twitter stream, we can obtain a JSONObject, which could by utilize into uploading to elasticsearch.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">String url = &quot;http://search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/profile&quot;;</span><br><span class="line">HttpClient client = HttpClientBuilder.create().build();</span><br><span class="line">HttpPost put = new HttpPost(url);</span><br><span class="line">put.setHeader(&quot;Content-type&quot;, &quot;application/json&quot;);</span><br><span class="line">StringEntity params =new StringEntity(json.toString());</span><br><span class="line">put.setEntity(params);</span><br><span class="line">HttpResponse response = client.execute(put);</span><br><span class="line">System.out.println(&quot;Response Code:&quot;+response.getStatusLine().getStatusCode());</span><br><span class="line">	</span><br><span class="line">BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));</span><br><span class="line">StringBuffer result = new StringBuffer();</span><br><span class="line">String line = &quot;&quot;;</span><br><span class="line">while ((line = rd.readLine()) != null) &#123;</span><br><span class="line">	result.append(line);</span><br><span class="line">&#125;</span><br><span class="line">							System.out.println(&quot;result:&quot;+result);</span><br></pre></td></tr></table></figure></p>
-<h2 id="UI-for-our-application"><a href="#UI-for-our-application" class="headerlink" title="UI for our application"></a>UI for our application</h2><p><img src="http://img.blog.csdn.net/20161025083341588" alt="Main UI"><br>This is the entry point for our application, you can choose keyword for twitter.<br><img src="http://img.blog.csdn.net/20161025083510465" alt="Google Map"><br>After you choose the keyword and click the “show” button, you can see the corresponding twitter location marked on the map.<br>Every 5 seconds, the front end will refresh and the counter, which can be seen in the second picture as 10, will gradually increase as our backend program continuously fetching data from twitter.</p>
 
           
         
@@ -972,178 +808,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/Kafka/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Phantomape">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Phantomape's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/28/Kafka/" itemprop="url">Introduction to Kafka</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-28T19:08:04+08:00">
-                2017-08-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Cloud-Computing/" itemprop="url" rel="index">
-                    <span itemprop="name">Cloud Computing</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="About-Kafka"><a href="#About-Kafka" class="headerlink" title="About Kafka"></a>About Kafka</h2><h4 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h4><p>Kafka is a distributed messaging system for collecting and delivering high volumes of log data with low latency.  On the one hand, Kafka is distributed and scalable, and offers high throughput. On the other hand, Kafka provides an API similar to a messaging system and allows applications to consume log events in real time</p>
-<h4 id="Traditional-Messaging-System"><a href="#Traditional-Messaging-System" class="headerlink" title="Traditional Messaging System"></a>Traditional Messaging System</h4><p>Traditional enterprise messaging systems are not to be a good fit for log processing. The reason is as follows:</p>
-<ol>
-<li>There is a mismatch in features offered by enterprise systems like out of order and unneeded features</li>
-<li>Many systems do not focus as strongly on throughput as their primary design constraint like no batch operations</li>
-<li>Weak in distributed support</li>
-<li>Many messaging systems assume near immediate consumption of messages, so the queue of unconsumed messages is always fairly small.<h4 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h4>A stream of messages of a particular type is defined by a topic. To balance load, a topic is divided into multiple partitions and each broker stores one or more of those partitions. A producer can publish messages to a topic. The published messages are then stored at a set of servers called brokers. A consumer can subscribe to one or more topics from the brokers, and consume the subscribed messages by pulling data from the brokers<br><img src="http://img.blog.csdn.net/20161206045920225" alt="Kafka Architecture"><h5 id="1-Efficiency-on-Single-Partition"><a href="#1-Efficiency-on-Single-Partition" class="headerlink" title="1.    Efficiency on Single Partition"></a>1.    Efficiency on Single Partition</h5></li>
-</ol>
-<ul>
-<li>Simple Storage:<br>Every time a producer publishes a message to a partition, the broker simply appends the message to the last segment file. The segment files are written to disk only after a configurable number of messages have been published or a certain amount of time has elapsed. A message is only exposed to the consumers after it is flushed and a message stored in Kafka does not have an explicit message id. Instead, each message is addressed by its logical offset in the log.<br><img src="http://img.blog.csdn.net/20161206050018554" alt="Kafka Log"></li>
-<li>Efficient Transfer:<br>Avoid explicitly caching messages in memory at the Kafka layer. Instead, cache them on the underlying file system page cache, which avoids double buffering.  Since Kafka does not cache messages in process at all, it has very little overhead in garbage collecting its memory, making efficient implementation in a VM-based language feasible. Plus, Kafka is a multi-subscriber system and a single message may be consumed multiple times by different consumer applications</li>
-<li>Stateless Broker:<br>The volume of info consumed is stored in consumer, which reduce complexity and the overhead on the broker. A message is automatically deleted if it has been retained in the broker longer than a certain period, typically 7 days; thus, A consumer can deliberately rewind back to an old offset and re-consume data. <h5 id="2-Distributed-Coordination"><a href="#2-Distributed-Coordination" class="headerlink" title="2.    Distributed Coordination"></a>2.    Distributed Coordination</h5></li>
-<li>A partition within a topic is the smallest unit of parallelism. Kafka has the concept of consumer groups. Each consumer group consists of one or more consumers that jointly consume a set of subscribed topics, and each message is delivered to only one of the consumers within the group. </li>
-<li>Not having a central “master” node, but instead let consumers coordinate among themselves in a decentralized fashion. To facilitate the coordination, we employ a highly available consensus service Zookeeper. Zookeeper has a very simple, file system like API and it has the following functions:<blockquote>
-<p>   Zookeeper can create a path, set the value of a path, read the value of a path, delete a path, and list the children of a path. It does a few more interesting things: (a) one can register a watcher on a path and get notified when the children of a path or the value of a path has changed; (b) a path can be created as ephemeral (as oppose to persistent), which means that if the creating client is gone, the path is automatically removed by the Zookeeper server; (c) zookeeper replicates its data to multiple servers, which makes the data highly reliable and available. Kafka uses Zookeeper for the following tasks: (1) detecting the addition and the removal of brokers and consumers, (2) triggering a rebalance process in each consumer when the above events happen, and (3) maintaining the consumption relationship and keeping track of the consumed offset of each partition</p>
-</blockquote>
-<h5 id="3-Delivery-Guarantees"><a href="#3-Delivery-Guarantees" class="headerlink" title="3.    Delivery Guarantees"></a>3.    Delivery Guarantees</h5></li>
-<li>In general, Kafka only guarantees at-least-once delivery</li>
-<li>Kafka guarantees that messages from a single partition are delivered to a consumer in order</li>
-</ul>
-<h2 id="Install-Kafka"><a href="#Install-Kafka" class="headerlink" title="Install Kafka"></a>Install Kafka</h2><p>Download and extract Kafka from <a href="http://kafka.apache.org/downloads.html" target="_blank" rel="noopener">http://kafka.apache.org/downloads.html</a>. For me, I have unzipped it in C:\Kafka</p>
-<h2 id="Set-Up-Kafka"><a href="#Set-Up-Kafka" class="headerlink" title="Set Up Kafka"></a>Set Up Kafka</h2><ol>
-<li>Go to your Kafka config directory. For me its C:\Kafka\kafka_2.11-0.10.1.0\config</li>
-<li>Edit file “server.properties”</li>
-<li>Find &amp; edit line “log.dirs=/tmp/kafka-logs” to “log.dir= C:\Kafka\kafka_2.11-0.10.1.0\kafka-logs”.(Actually it doesn’t matter where you put your log)</li>
-<li>If your Zookeeper is running on some other machine or cluster you can edit “zookeeper.connect:2181” to your custom IP and port. For this demo we are using same machine so no need to change. Also Kafka port &amp; broker.id are configurable in this file. Leave other settings as it is.</li>
-<li>Your Kafka will run on default port 9092 &amp; connect to zookeeper’s default port which is 2181.<h2 id="Run-Kafka-Server"><a href="#Run-Kafka-Server" class="headerlink" title="Run Kafka Server"></a>Run Kafka Server</h2></li>
-<li>Go to your Kafka installation directory C:\Kafka\kafka_2.11-0.10.1.0\</li>
-<li>Open a command prompt here by pressing Shift + right click and choose “Open command window here” option)</li>
-<li>Now type .\bin\windows\kafka-server-start.bat .\config\server.properties and press Enter.(Before you run Kafka server, make sure you have opened ZooKeeper)<br><img src="http://img.blog.csdn.net/20161115055337719" alt="Kafka"></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/Elastic Distributed Database/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1282,6 +946,342 @@
 <p>download related dependency for this project:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:resolve</span><br><span class="line">mvn eclipse:eclipse</span><br></pre></td></tr></table></figure></p>
 <p>and then change ipaddress in tpcw.properties in our project:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">writeQueue = &lt;MASTER_IP&gt;</span><br><span class="line">readQueue = &lt;MASTER_IP&gt;,&lt;SLAVE1_IP&gt;,&lt;SLAVE2_IP&gt;</span><br><span class="line">candidateQueur = &lt;CANDIDATE_IP&gt;</span><br></pre></td></tr></table></figure></p>
 <p>Before we run the project, we must re-run the prepareMasterSlaves.sh, which would take approximately 5 minutes. Next, run enableMonitors.sh, and we will see new tabs showing performance.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/Twitter Map/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/28/Twitter Map/" itemprop="url">Twitter Map</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-28T19:08:04+08:00">
+                2017-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Cloud-Computing/" itemprop="url" rel="index">
+                    <span itemprop="name">Cloud Computing</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>To build a twittmap, we need to utilize the twitter API. Here, I chose twitter4j, which is an unofficial Java library for the Twitter API. With Twitter4J, you can easily integrate your Java application with the Twitter service. There are some tutorials here: <a href="https://xmeng.wordpress.com/2011/07/10/how-to-handle-sign-in-with-twitter-using-twitter4j/" title="How to sign in with twitter using twitter4j" target="_blank" rel="noopener">How to “Sign in with Twitter” using twitter4j</a>.</p>
+<h2 id="Register-twitter-app"><a href="#Register-twitter-app" class="headerlink" title="Register twitter app"></a>Register twitter app</h2><p>Click this <a href="https://dev.twitter.com/apps" target="_blank" rel="noopener">link</a>and fill out the following form, it should be fine. Just remember to grant your app access for read and write.</p>
+<h2 id="Include-twitter4j"><a href="#Include-twitter4j" class="headerlink" title="Include twitter4j"></a>Include twitter4j</h2><p>For those who are not familiar with java, it would be a painful process to learn how use new tools at first(I like VS better, lol). Don’t worry, just follow the steps below. </p>
+<ol>
+<li>Download twitter4j from <a href="http://twitter4j.org/en/" target="_blank" rel="noopener">here</a>.</li>
+<li>Unzip it.</li>
+<li>After you create a java project, Right-click on your Java project and Select Properties.</li>
+<li>Choose Java Build Path and select the third tab, Libraries.</li>
+<li>Click add external library and add twitter4j-core-4.0.4.jar.<h2 id="Begin-programming"><a href="#Begin-programming" class="headerlink" title="Begin programming"></a>Begin programming</h2>A lot of examples are available. Here is the sample code used in tutorial mentioned above (Using eclipse).<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.Status;</span><br><span class="line">import twitter4j.Twitter;</span><br><span class="line">import twitter4j.TwitterException;</span><br><span class="line">import twitter4j.TwitterFactory;</span><br><span class="line">import twitter4j.auth.AccessToken;</span><br><span class="line">import twitter4j.auth.RequestToken;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line">import twitter4j.conf.Configuration;</span><br><span class="line"> </span><br><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line">public class FirstClass &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		String testStatus=&quot;Hello from twitter4j&quot;;</span><br><span class="line">		 </span><br><span class="line">        ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">        //the following is set without accesstoken- desktop client</span><br><span class="line">        cb.setDebugEnabled(true)</span><br><span class="line">        	.setOAuthConsumerKey(&quot;CONSUMER-KEY&quot;)</span><br><span class="line">        	.setOAuthConsumerSecret(&quot;CONSUMER-SECRET&quot;);</span><br><span class="line">		try&#123;</span><br><span class="line">			TwitterFactory tf = new TwitterFactory(cb.build());</span><br><span class="line">            Twitter twitter = tf.getInstance();</span><br><span class="line">			</span><br><span class="line">			try&#123;</span><br><span class="line">				RequestToken requestToken = twitter.getOAuthRequestToken();</span><br><span class="line">                System.out.println(&quot;Got request token.&quot;);</span><br><span class="line">                System.out.println(&quot;Request token: &quot; + requestToken.getToken());</span><br><span class="line">                System.out.println(&quot;Request token secret: &quot; + requestToken.getTokenSecret());</span><br><span class="line">                AccessToken accessToken = null;</span><br><span class="line">                </span><br><span class="line">                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">                while(accessToken == null)&#123;</span><br><span class="line">                	System.out.println(&quot;Open the following URL and grant access to your account:&quot;);</span><br><span class="line">                    System.out.println(requestToken.getAuthorizationURL());</span><br><span class="line">                    System.out.print(&quot;Enter the PIN(if available) and hit enter after you granted access.[PIN]:&quot;);</span><br><span class="line">                    String pin = br.readLine();</span><br><span class="line">                    try &#123;</span><br><span class="line">                        if (pin.length() &gt; 0) &#123;</span><br><span class="line">                            accessToken = twitter.getOAuthAccessToken(requestToken, pin);</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            accessToken = twitter.getOAuthAccessToken(requestToken);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; catch (TwitterException te) &#123;</span><br><span class="line">                        if (401 == te.getStatusCode()) &#123;</span><br><span class="line">                            System.out.println(&quot;Unable to get the access token.&quot;);</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            te.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;Got access token.&quot;);</span><br><span class="line">                System.out.println(&quot;Access token: &quot; + accessToken.getToken());</span><br><span class="line">                System.out.println(&quot;Access token secret: &quot; + accessToken.getTokenSecret());</span><br><span class="line">			&#125; catch(IllegalStateException ie)&#123;</span><br><span class="line">				if (!twitter.getAuthorization().isEnabled()) &#123;</span><br><span class="line">                    System.out.println(&quot;OAuth consumer key/secret is not set.&quot;);</span><br><span class="line">                    System.exit(-1);</span><br><span class="line">                &#125;</span><br><span class="line">			&#125;</span><br><span class="line">			Status status = twitter.updateStatus(testStatus);</span><br><span class="line">	        System.out.println(&quot;Successfully updated the status to [&quot; + status.getText() + &quot;].&quot;);</span><br><span class="line">	        System.exit(0);</span><br><span class="line">		&#125; catch (TwitterException te) &#123;</span><br><span class="line">            te.printStackTrace();</span><br><span class="line">            System.out.println(&quot;Failed to get timeline: &quot; + te.getMessage());</span><br><span class="line">            System.exit(-1);</span><br><span class="line">        &#125; catch (IOException ioe) &#123;</span><br><span class="line">            ioe.printStackTrace();</span><br><span class="line">            System.out.println(&quot;Failed to read the system input.&quot;);</span><br><span class="line">            System.exit(-1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>This piece of code can post a twitter from your account, after running this u can see the following instructions.<br><img src="http://img.blog.csdn.net/20161012030205951" alt="Instructions"><br>Just click into the url it mentioned and grant access to your app, and then type in the PIN code that it gives u. After that, u can check ur twitter now.<br><img src="http://img.blog.csdn.net/20161012030038935" alt="Result"></p>
+<h2 id="Use-streaming-API"><a href="#Use-streaming-API" class="headerlink" title="Use streaming API"></a>Use streaming API</h2><p>Here is the code.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.*;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line"></span><br><span class="line">public class PrintSampleStream &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws TwitterException&#123;</span><br><span class="line">		 ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">	        //the following is set without accesstoken- desktop client</span><br><span class="line">	        cb.setDebugEnabled(true)</span><br><span class="line">	        	.setOAuthConsumerKey(&quot;I won&apos;t tell u&quot;)</span><br><span class="line">	        	.setOAuthConsumerSecret(&quot;what my key and secret is&quot;)</span><br><span class="line">	        	.setOAuthAccessToken(&quot;LOL&quot;)</span><br><span class="line">	        	.setOAuthAccessTokenSecret(&quot;:)&quot;);</span><br><span class="line">		</span><br><span class="line">		TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();</span><br><span class="line">	    StatusListener listener = new StatusListener() &#123;</span><br><span class="line">	    	 public void onStatus(Status status) &#123;</span><br><span class="line">	             System.out.println(status.getUser().getName() + &quot; : &quot; + status.getText());</span><br><span class="line">	         &#125;</span><br><span class="line">	         public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) &#123;&#125;</span><br><span class="line">	         public void onTrackLimitationNotice(int numberOfLimitedStatuses) &#123;&#125;</span><br><span class="line">	         public void onException(Exception ex)&#123;</span><br><span class="line">	             ex.printStackTrace();</span><br><span class="line">	         &#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onScrubGeo(long arg0, long arg1) &#123;</span><br><span class="line">				// TODO Auto-generated method stub</span><br><span class="line">			&#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onStallWarning(StallWarning arg0) &#123;</span><br><span class="line">				// TODO Auto-generated method stub			</span><br><span class="line">			&#125;</span><br><span class="line">	     &#125;;</span><br><span class="line">	     twitterStream.addListener(listener);</span><br><span class="line">	     twitterStream.sample();</span><br><span class="line">	     </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>This piece of sample code enables you to fetch tweets from twitter in real-time.</p>
+<h2 id="Fetch-Filtered-Stream"><a href="#Fetch-Filtered-Stream" class="headerlink" title="Fetch Filtered Stream"></a>Fetch Filtered Stream</h2><p>Sometimes, we would like to search information that we are interested in, so we may need to filter the stream so that we can get relevant twitters. The code is shown below.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">package com.example.test;</span><br><span class="line"></span><br><span class="line">import twitter4j.*;</span><br><span class="line">import twitter4j.conf.ConfigurationBuilder;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class PrintFilteredStream &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws TwitterException &#123;</span><br><span class="line">		String[] keywordsArray = &#123;&quot;iphone&quot;, &quot;samsung&quot;&#125;;</span><br><span class="line">		</span><br><span class="line">		ConfigurationBuilder cb = new ConfigurationBuilder();</span><br><span class="line">         </span><br><span class="line">	        //the following is set without accesstoken- desktop client</span><br><span class="line">	    cb.setDebugEnabled(true)</span><br><span class="line">	    	.setOAuthConsumerKey(&quot;CONSUMER-KEY&quot;)</span><br><span class="line">	        .setOAuthConsumerSecret(&quot;CONSUMER-SECRET&quot;)</span><br><span class="line">	        .setOAuthAccessToken(&quot;ACCESS-TOKEN&quot;)</span><br><span class="line">	        .setOAuthAccessTokenSecret(&quot;ACCESS-TOKEN-SECRET&quot;);</span><br><span class="line">		</span><br><span class="line">		//	Implementing StatusListner</span><br><span class="line">		StatusListener listener = new StatusListener() &#123;</span><br><span class="line">			@Override</span><br><span class="line">	    	public void onStatus(Status status) &#123;</span><br><span class="line">	            System.out.println(status.getUser().getName() + &quot; : &quot; + status.getText());</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) &#123;</span><br><span class="line">				System.out.println(&quot;Got a status deletion notice id:&quot; + statusDeletionNotice.getStatusId());</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">	        public void onTrackLimitationNotice(int numberOfLimitedStatuses) &#123;</span><br><span class="line">				System.out.println(&quot;Got track limitation notice:&quot; + numberOfLimitedStatuses);</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">	        public void onException(Exception ex)&#123;</span><br><span class="line">				ex.printStackTrace();</span><br><span class="line">	        &#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onScrubGeo(long userId, long upToStatusId) &#123;</span><br><span class="line">				System.out.println(&quot;Got scrub_geo event userId:&quot; + userId + &quot; upToStatusId:&quot; + upToStatusId);</span><br><span class="line">			&#125;</span><br><span class="line">			@Override</span><br><span class="line">			public void onStallWarning(StallWarning warning) &#123;</span><br><span class="line">				System.out.println(&quot;Got stall warning:&quot; + warning);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	     </span><br><span class="line">		TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();</span><br><span class="line">		twitterStream.addListener(listener);</span><br><span class="line">		ArrayList&lt;Long&gt; follow = new ArrayList&lt;Long&gt;();</span><br><span class="line">		ArrayList&lt;String&gt; track = new ArrayList&lt;String&gt;();</span><br><span class="line">		for(String arg : keywordsArray)&#123;</span><br><span class="line">			if(isNumericalArgument(arg))&#123;</span><br><span class="line">				for(String id : arg.split(&quot;,&quot;))&#123;</span><br><span class="line">					follow.add(Long.parseLong(id));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				track.addAll(Arrays.asList(arg.split(&quot;,&quot;)));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		long[] followArray = new long[follow.size()];</span><br><span class="line">		for(int i = 0; i &lt; follow.size(); i++)&#123;</span><br><span class="line">			followArray[i] = follow.get(i);</span><br><span class="line">		&#125;</span><br><span class="line">		String[] trackArray = track.toArray(new String[track.size()]);</span><br><span class="line">		twitterStream.filter(new FilterQuery(0, followArray, trackArray));	 </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static boolean isNumericalArgument(String argument)&#123;</span><br><span class="line">		String args[] = argument.split(&quot;,&quot;);</span><br><span class="line">		boolean isNumericalArgument = true;</span><br><span class="line">		for(String arg : args)&#123;</span><br><span class="line">			try&#123;</span><br><span class="line">				Integer.parseInt(arg);</span><br><span class="line">			&#125; catch(NumberFormatException nfe)&#123;</span><br><span class="line">				isNumericalArgument = false;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return isNumericalArgument;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Set-up-elasticsearch-environment"><a href="#Set-up-elasticsearch-environment" class="headerlink" title="Set up elasticsearch environment"></a>Set up elasticsearch environment</h2><ol>
+<li>Go to AWS console and select elasticsearch service(you can also choose to use elasticsearch by downloading and unzipping it from <a href="https://www.elastic.co/" target="_blank" rel="noopener">here</a>)</li>
+<li>Set access police to open access or any way you like, and then use curl to create index using <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html" target="_blank" rel="noopener">index</a> API.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XPUT &apos;http://search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/&apos; -d &apos;&#123;</span><br><span class="line">    &quot;settings&quot; : &#123;</span><br><span class="line">        &quot;index&quot; : &#123;</span><br><span class="line">            &quot;number_of_shards&quot; : 3, </span><br><span class="line">            &quot;number_of_replicas&quot; : 2 </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>this piece of code will create an index named “user” in your AWS domain. </p>
+<ol start="3">
+<li>Next, you are going to create mapping. Here, the mapping called “profile” is created, which has three properties: text, latitude and longitude.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/_mapping/profile -d </span><br><span class="line">&apos;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot; : &#123;</span><br><span class="line">	    &quot;properties&quot; : &#123;</span><br><span class="line">		&quot;text&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;,</span><br><span class="line">		&quot;latitude&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;,</span><br><span class="line">		&quot;longitude&quot; : &#123; &quot;type&quot; : &quot;string&quot;&#125;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Upload-data-to-elasticsearch"><a href="#Upload-data-to-elasticsearch" class="headerlink" title="Upload data to elasticsearch"></a>Upload data to elasticsearch</h2><p>To upload data to elasticsearch, you can use the curl command in cygwin, since I am using a windows machine, or put this piece of code into the java program that are fetching twitter. From twitter stream, we can obtain a JSONObject, which could by utilize into uploading to elasticsearch.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">String url = &quot;http://search-twitter-1-kf5qeriqw5iu6uasbyv6dmwfbq.us-west-2.es.amazonaws.com/user/profile&quot;;</span><br><span class="line">HttpClient client = HttpClientBuilder.create().build();</span><br><span class="line">HttpPost put = new HttpPost(url);</span><br><span class="line">put.setHeader(&quot;Content-type&quot;, &quot;application/json&quot;);</span><br><span class="line">StringEntity params =new StringEntity(json.toString());</span><br><span class="line">put.setEntity(params);</span><br><span class="line">HttpResponse response = client.execute(put);</span><br><span class="line">System.out.println(&quot;Response Code:&quot;+response.getStatusLine().getStatusCode());</span><br><span class="line">	</span><br><span class="line">BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));</span><br><span class="line">StringBuffer result = new StringBuffer();</span><br><span class="line">String line = &quot;&quot;;</span><br><span class="line">while ((line = rd.readLine()) != null) &#123;</span><br><span class="line">	result.append(line);</span><br><span class="line">&#125;</span><br><span class="line">							System.out.println(&quot;result:&quot;+result);</span><br></pre></td></tr></table></figure></p>
+<h2 id="UI-for-our-application"><a href="#UI-for-our-application" class="headerlink" title="UI for our application"></a>UI for our application</h2><p><img src="http://img.blog.csdn.net/20161025083341588" alt="Main UI"><br>This is the entry point for our application, you can choose keyword for twitter.<br><img src="http://img.blog.csdn.net/20161025083510465" alt="Google Map"><br>After you choose the keyword and click the “show” button, you can see the corresponding twitter location marked on the map.<br>Every 5 seconds, the front end will refresh and the counter, which can be seen in the second picture as 10, will gradually increase as our backend program continuously fetching data from twitter.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/Computational Aspects of Robotics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Phantomape">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantomape's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/28/Computational Aspects of Robotics/" itemprop="url">Computational Aspects of Robotics</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-28T19:08:04+08:00">
+                2017-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Robotics/" itemprop="url" rel="index">
+                    <span itemprop="name">Robotics</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Course-Notes-on-COMS-W4733"><a href="#Course-Notes-on-COMS-W4733" class="headerlink" title="Course Notes on COMS W4733"></a>Course Notes on COMS W4733</h1><p>textbook: Introduction to autonomous mobile robots 2nd edition<br>course website: <a href="http://www.cs.columbia.edu/~allen/F17/about.html" target="_blank" rel="noopener">www.cs.columbia.edu/~allen/F17/about.html</a></p>
+<p>No midterm</p>
+<h2 id="Locomotion"><a href="#Locomotion" class="headerlink" title="Locomotion"></a>Locomotion</h2><p>Owing to limitations, mobile robots generally locomote either using wheeled<br>mechanisms.</p>
+<h3 id="Key-Issues-for-Locomotion"><a href="#Key-Issues-for-Locomotion" class="headerlink" title="Key Issues for Locomotion"></a>Key Issues for Locomotion</h3><ul>
+<li>stability</li>
+<li>characteristics of contact</li>
+<li>type of environment</li>
+</ul>
+<h3 id="Legged-Mobile-Robots"><a href="#Legged-Mobile-Robots" class="headerlink" title="Legged Mobile Robots"></a>Legged Mobile Robots</h3><p>Characterized by a series of point contacts between the robot and the ground. For a mobile robot<br>with legs, the total number of distinct event sequences for a walking machine is<br>$$N = (2k - 1)!$$</p>
+<h4 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h4><ul>
+<li>adaptability and maneuverability in rough terrain</li>
+<li>capable of crossing a hole or chasm so long as its reach<br>exceeds the width of the hole</li>
+</ul>
+<h4 id="Disadvantages"><a href="#Disadvantages" class="headerlink" title="Disadvantages"></a>Disadvantages</h4><ul>
+<li>power and mechanical complexity</li>
+<li>high maneuverability will only be achieved if the legs have a sufficient number of degrees of freedom to impart forces in a number of different directions</li>
+</ul>
+<h3 id="Wheeled-Mobile-Robots"><a href="#Wheeled-Mobile-Robots" class="headerlink" title="Wheeled Mobile Robots"></a>Wheeled Mobile Robots</h3><h4 id="Advantages-1"><a href="#Advantages-1" class="headerlink" title="Advantages"></a>Advantages</h4><ul>
+<li>good efficiency</li>
+<li>no balance issues</li>
+</ul>
+<h4 id="Disadvantages-1"><a href="#Disadvantages-1" class="headerlink" title="Disadvantages"></a>Disadvantages</h4><ul>
+<li>traction</li>
+<li>stability</li>
+<li>maneuverability</li>
+</ul>
+<h3 id="Aerial-Mobile-Robots"><a href="#Aerial-Mobile-Robots" class="headerlink" title="Aerial Mobile Robots"></a>Aerial Mobile Robots</h3><p>(I guess I need to post some photos in the future)</p>
 
           
         
